@@ -1,3 +1,7 @@
+/**
+ * Temporary "Under Construction" header for the root page. Displays poorly drawn construction stick figure.
+ * @returns the created component.
+ */
 const UnderConstruction = () => {
     return (
         <div className="App">

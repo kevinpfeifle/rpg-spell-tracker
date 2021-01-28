@@ -1,5 +1,9 @@
 import {Link} from 'react-router-dom';
 
+/**
+ * Component which creates a temporary "about" page. Will update this later once we actually have a working webapp.
+ * @returns the created component.
+ */
 const About = () => {
     return (
         <div>

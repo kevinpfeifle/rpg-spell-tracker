@@ -1,5 +1,9 @@
 import {Link, useLocation} from 'react-router-dom';
 
+/**
+ * Component which creates a temporary generic footer. Contains links to the different routes we have.
+ * @returns the created component.
+ */
 const Footer = () => {
     const location = useLocation();
     const invalidLinks = ['/sample-spellbook', '/about'];

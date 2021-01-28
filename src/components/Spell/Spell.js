@@ -1,24 +1,20 @@
 import { useState, useEffect } from 'react'
 import SpellRef from './components/SpellRef';
 import SpellDesc from './components/SpellDesc';
-/**
- * Info needed in a spell block:
- * 1. Spell Name
- * 2. Spell Level
- * 3. Spell School
- * 4. Casting Time
- * 5. Range
- * 6. Components
- * 7. Duration
- * 8. Classes
- * 9. Description (This could be broken up into some simpler, like a quick reference of spell type and dice to roll?)
- * 
- * 
- * Best way to do it I think, spell quick reference, click on it to expand and show the whole spell...?
- * Break up into multiple components.
- */
 
+/**
+ * @todo: Create a context prop passed in by the creatign component.
+ * Eventually will need to add a variable passed into this component -- context to determine if it is a spellbook spell, or a full spell list spell. 
+ * This is determine if we render the classes which can access the spell in the quick reference.
+ * */ 
+
+/**
+ * Component which displays an entire spell, clicking it will reveal an extended description of the spell.
+ * @param {Object} props.spell the spell object used to display the contents of the spell.
+ * @returns the created component.
+ */
 const Spell = ({spell}) => {
+    // Component state to alter the visibility of the SpellDesc component.
     const [spellVis, setspellVis] = useState([]);
     const toggleVisibility = () => {
         setspellVis(!spellVis);
