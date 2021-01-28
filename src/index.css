@@ -11,3 +11,51 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.spellbookHeader ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
+}
+
+.spellbookHeader li {
+  float: left;
+}
+
+.spellbookHeader li h4 {
+  display: block;
+  padding: 8px;
+  color: #dddddd;
+}
+
+.spellRef {
+  display: flex;
+  background: #f4f4f4;
+  margin: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+.spellRef h3 {
+  padding-right: 1em;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.spellRef h4 {
+  padding-right: 1em;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.spellDesc {
+  display: block;
+  background: #dedede;
+  margin: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+}
