@@ -1,4 +1,5 @@
-import mapSpellLevel from '../../../utils/mapSpellLevel';
+// Util imports
+import {mapSpellLevel} from '../../../utils/spellTransforms';
 
 /**
  * Component to display the quick reference of a given spell. It has a prop function t control the visibility of SpellDesc.

@@ -3,8 +3,8 @@ import Header from './components/Header';
 import {Link} from 'react-router-dom';
 
 /**
- * Need to show a sortable header, as well as each available spell in the spellbook.
- * Spell quick reference to be displayed with: spell name, spell level, school of magic.
+ * @todo
+ * Need to show a sortable header icon, as well as each available spell in the spellbook.
  * Spell book will also need to track if the spell is prepared or not, and have a way to enable if it is prepared for each spell...
  */
 
@@ -13,11 +13,10 @@ import {Link} from 'react-router-dom';
  * @param {Array} props.spells array of spells to be rendered by the spellbook
  * @returns the created component.
  */
-const Spellbook = ({spells}) => {
-    console.log(spells);
+const Spellbook = ({spells, sorting}) => {
     return (
         <div className='spellbook'>
-            <Header />
+            <Header spells={spells} sorting={sorting} />
             {
                 spells.map((spell) =>  (
                     <Spell key={spell.id} spell={spell} />

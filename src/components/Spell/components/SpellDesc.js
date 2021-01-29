@@ -1,4 +1,4 @@
-import mapSpellLevel from '../../../utils/mapSpellLevel';
+import {mapSpellLevel} from '../../../utils/spellTransforms';
 
 /**
  * Component to display the description of a given spell. The Spell and SpellRef components control the visibility of SpellDesc.
