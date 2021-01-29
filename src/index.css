@@ -27,6 +27,7 @@ code {
   margin-right: 15px;
   width: 500px;
   flex-wrap: wrap;
+  display: flex;
 }
 
 .spellbookHeader .headerSpellLevel {
@@ -35,6 +36,7 @@ code {
   margin-right: 15px;
   width: 150px;
   flex-wrap: wrap;
+  display: flex;
 }
 
 .spellbookHeader .headerSpellSchool {
@@ -43,6 +45,7 @@ code {
   margin-right: 15px;
   width: 200px;
   flex-wrap: wrap;
+  display: flex;
 }
 
 .spellbookHeader .headerSpellAttack {
@@ -51,6 +54,7 @@ code {
   margin-right: 15px;
   width: 200px;
   flex-wrap: wrap;
+  display: flex;
 }
 
 .spellbookHeader .headerSpellEffect {
@@ -59,6 +63,12 @@ code {
   margin-right: 15px;
   width: 250px;
   flex-wrap: wrap;
+  display: flex;
+}
+
+.sortArrow {
+  margin-top: 25px;
+  margin-left: 5px;
 }
 
 .spellRef {

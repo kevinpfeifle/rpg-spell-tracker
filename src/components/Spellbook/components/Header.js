@@ -1,6 +1,9 @@
 // React imports
 import { useState, useEffect } from 'react'
 
+// React Icons imports
+import { RiArrowDropDownLine, RiArrowDropUpLine } from "react-icons/ri";
+
 /**
  * Component which displays the header of a spellbook. 
  * @todo Implement onlick functions to enable sorting of spells by the header columns.
@@ -32,18 +35,28 @@ const Header = ({spells, sorting}) => {
         <div className='spellbookHeader'>
             <div className='headerSpellName' onClick={()=>sortSpells('spellName')}>
                 <h4>Spell Name</h4>
+                {(sortType.sortField === 'spellName' && !sortType.reverse) && <RiArrowDropDownLine className='sortArrow' />}
+                {(sortType.sortField === 'spellName' && sortType.reverse) && <RiArrowDropUpLine className='sortArrow' />}
             </div>
             <div className='headerSpellLevel' onClick={()=>sortSpells('spellLevel')}>
                 <h4>Level</h4>
+                {(sortType.sortField === 'spellLevel' && !sortType.reverse) && <RiArrowDropDownLine className='sortArrow' />}
+                {(sortType.sortField === 'spellLevel' && sortType.reverse) && <RiArrowDropUpLine className='sortArrow' />}
             </div>
             <div className='headerSpellSchool' onClick={()=>sortSpells('spellSchool')}>
                 <h4>School of Magic</h4>
+                {(sortType.sortField === 'spellSchool' && !sortType.reverse) && <RiArrowDropDownLine className='sortArrow' />}
+                {(sortType.sortField === 'spellSchool' && sortType.reverse) && <RiArrowDropUpLine className='sortArrow' />}
             </div>
             <div className='headerSpellAttack' onClick={()=>sortSpells('spellAttack')}>
                 <h4>Attack/Saving Throw</h4>
+                {(sortType.sortField === 'spellAttack' && !sortType.reverse) && <RiArrowDropDownLine className='sortArrow' />}
+                {(sortType.sortField === 'spellAttack' && sortType.reverse) && <RiArrowDropUpLine className='sortArrow' />}
             </div>
             <div className='headerSpellEffect' onClick={()=>sortSpells('spellEffect')}>
                 <h4>Damage/Effect</h4>
+                {(sortType.sortField === 'spellEffect' && !sortType.reverse) && <RiArrowDropDownLine className='sortArrow' />}
+                {(sortType.sortField === 'spellEffect' && sortType.reverse) && <RiArrowDropUpLine className='sortArrow' />}
             </div>
         </div>
     )
