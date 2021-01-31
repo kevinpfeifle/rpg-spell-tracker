@@ -1,5 +1,11 @@
+// React imports
+import { useState, useEffect } from 'react'
+
 // Util imports
 import {mapSpellLevel} from '../../../utils/spellTransforms';
+
+// React Icons imports
+import { RiAddLine, RiSubtractLine } from "react-icons/ri";
 
 /**
  * Component to display the quick reference of a given spell. It has a prop function t control the visibility of SpellDesc.
@@ -8,14 +14,23 @@ import {mapSpellLevel} from '../../../utils/spellTransforms';
  * @returns the created component.
  */
 const SpellRef = ({spell, toggleVisibility}) => {
+    const [expandIcon, setExpandIcon] = useState(true);
+
     const onClick = () => {
+        setExpandIcon(!expandIcon);
         toggleVisibility();
+    };
+    const setNameTips = () => {
+        let nameTips = [];
+        if (spell.concentration) nameTips.push('C');
+        if (spell.ritual) nameTips.push('R');
+        return nameTips;
     };
     return (
         <div className='spellRef' onClick={onClick}>
             <div className='spellName'>
                 <h4>{spell.spellName}</h4>
-                {spell.ritual && <h5><em>R</em></h5>}
+                {(setNameTips().length > 0) && <h5><em>{setNameTips().toString()}</em></h5>}
             </div>
             <div className='spellLevel'>
                 <h4>{mapSpellLevel(spell.spellLevel)}</h4>
@@ -29,6 +44,8 @@ const SpellRef = ({spell, toggleVisibility}) => {
             <div className='spellEffect'>
                 <h4>{spell.spellEffect}</h4>
             </div>
+            {(expandIcon) && <RiAddLine className='expandSpell' />}
+            {(!expandIcon) && <RiSubtractLine className='expandSpell' />}
         </div>
     );
 };

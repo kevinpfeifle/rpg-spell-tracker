@@ -6,6 +6,7 @@
             "spellLevel": 2,
             "spellSchool": "Evocation",
             "castingTime": "1 action",
+            "concentration": false,
             "range": "30 feet",
             "components": ["V","S","M"],
             "materialComponents": "A red dragon's scale",
@@ -23,6 +24,7 @@
             "spellLevel": 1,
             "spellSchool": "Evocation",
             "castingTime": "1 action",
+            "concentration": false,
             "range": "Self (15-foot cone)",
             "components": ["V","S"],
             "duration": "Instantaneous",
@@ -39,6 +41,7 @@
             "spellLevel": 1,
             "spellSchool": "Conjuration",
             "castingTime": "1 hour",
+            "concentration": false,
             "range": "10 feet",
             "components": ["V","S","M"],
             "materialComponents": "10 gp worth of charcoal, incense, and herbs that must be consumed by fire in a brass brazier",
@@ -55,6 +58,7 @@
             "spellLevel": 0,
             "spellSchool": "Evocation",
             "castingTime": "1 action",
+            "concentration": false,
             "range": "120 feet",
             "components": ["V","S"],
             "duration": "Instantaneous",
@@ -70,6 +74,7 @@
             "spellLevel": 3,
             "spellSchool": "Evocation",
             "castingTime": "1 action",
+            "concentration": false,
             "range": "150 feet",
             "components": ["V","S","M"],
             "materialComponents": "A tiny ball of bat guano and sulfur",
@@ -80,6 +85,22 @@
             "spellEffect": "Fire",
             "description": "A bright streak flashes from your pointing finger to a point you choose within range and then blossoms with a low roar into an explosion of flame. Each creature in a 20-foot-radius sphere centered on that point must make a Dexterity saving throw. A target takes 8d6 fire damage on a failed save, or half as much damage on a successful one. The fire spreads around corners. It ignites flammable objects in the area that aren’t being worn or carried.",
             "higherLevels": "When you cast this spell using a spell slot of 4th level or higher, the damage increases by 1d6 for each slot level above 3rd."
+        },
+        {
+            "id": 6,
+            "spellName": "Detect Magic",
+            "spellLevel": 1,
+            "spellSchool": "Divination",
+            "castingTime": "1 action",
+            "concentration": true,
+            "range": "Self",
+            "components": ["V","S"],
+            "duration": "Concentration, Up to 10 minutes",
+            "classes": "Bard, Cleric, Druid, Paladin, Ranger, Sorcerer, Wizard",
+            "ritual": true,
+            "spellAttack": "None",
+            "spellEffect": "Detection",
+            "description": "For the duration, you sense the presence of magic within 30 feet of you. If you sense magic in this way, you can use your action to see a faint aura around any visible creature or object in the area that bears magic, and you learn its school of magic, if any. The spell can penetrate most barriers, but it is blocked by 1 foot of stone, 1 inch of common metal, a thin sheet of lead, or 3 feet of wood or dirt."
         }
     ]
 }

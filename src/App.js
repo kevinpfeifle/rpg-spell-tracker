@@ -28,8 +28,7 @@ function App() {
 
   // Callback function to be executed by Spellbook Header component on rerender of state.
   const sortSpells = useCallback((spells, sortField, sortDirection) => {
-    let test = spellSorting(spells, sortField, sortDirection) 
-    setSpells(test);
+    setSpells(spellSorting(spells, sortField, sortDirection) );
   }, []);
 
   return (
