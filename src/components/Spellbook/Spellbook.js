@@ -14,13 +14,13 @@ import {Link} from 'react-router-dom';
  * @param {Array} props.spells array of spells to be rendered by the spellbook
  * @returns the created component.
  */
-const Spellbook = ({spells, sorting}) => {
+const Spellbook = ({spells, pureSpells, sorting, filter}) => {
     return (
         <div className='spellbook'>
-            <Filter />
+            <Filter spells={spells} pureSpells={pureSpells} filterFunc={filter} />
             <Header spells={spells} sorting={sorting} />
             {
-                spells.map((spell) =>  (
+                spells.map((spell) => (
                     <Spell key={spell.id} spell={spell} />
                 ))
             }

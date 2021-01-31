@@ -15,6 +15,7 @@ import Spellbook from './components/Spellbook/Spellbook';
 import {spellSorting} from './utils/spellTransforms';
 
 function App() {
+  const [pureSpells, setPureSpells] = useState([]); // An unchanging state reference to the original spell list. Needed as filter mutates the spells list.
   const [spells, setSpells] = useState([]);
 
   // GETs the spell list and sorts before setting it to state.
@@ -22,14 +23,19 @@ function App() {
     const getSpells = async () => {
       const spellsFromServer = await fetchSpells();
       setSpells(spellSorting(spellsFromServer));
+      setPureSpells(spellSorting(spellsFromServer));
     };
     getSpells();
   }, []);
 
   // Callback function to be executed by Spellbook Header component on rerender of state.
   const sortSpells = useCallback((spells, sortField, sortDirection) => {
-    setSpells(spellSorting(spells, sortField, sortDirection) );
+    setSpells(spellSorting(spells, sortField, sortDirection));
   }, []);
+
+  const filterSpells = (spells) => {
+    setSpells(spells);
+  };
 
   return (
     <Router>
@@ -42,7 +48,7 @@ function App() {
         <Route 
           path='/sample-spellbook' 
           render={() => (
-            <Spellbook spells={spells} sorting={sortSpells}/>
+            <Spellbook spells={spells} pureSpells={pureSpells} sorting={sortSpells} filter={filterSpells}/>
           )} 
         /> 
         <Route path='/about' component={About} /> 
