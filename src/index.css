@@ -178,19 +178,99 @@ code {
   padding: 0;
 }
 
+.dropDownX {
+  /* float: right; */
+  /* position:absolute; */
+  /* clear:both; */
+  /* padding-top: 4px; */
+  margin: auto;
+  /* margin-left: 5px; */
+  border-left: solid;
+  border-width: 2px;
+  height: 100%;
+    /* width: 50%; */
+    position: absolute;
+    right: 0;
+    top: 0;
+    display: flex;
+  align-items: center
+  /* overflow: hidden; */
+  /* display: inline-block; */
+}
+
+.dropDownX:hover {
+  background-color: red;
+}
+
+.dropDownItem p {
+  /* float: left; */
+  border-bottom: solid;
+  margin: 0;
+  padding: 0;
+}
+
+.dropDownBox {
+  float: left;
+  margin: 0;
+  padding: 0;
+}
+
+.dropDownSelected {
+  display: inline-block;
+  margin: 1px;
+  border-style: solid;
+  border-width: 2px;
+  border-radius: 5px;
+  padding-left: 2px;
+}
+
+.dropDownSelected p {
+  float: left;
+  margin: 0;
+  padding: 0;
+  /* padding-right: 10px; */
+  /* display: inline-block; */
+}
+
+.dropDownSelectedX {
+  float: right;
+  padding-top: 4px;
+  margin: auto;
+  margin-left: 5px;
+  border-left: solid;
+  border-width: 2px;
+  /* display: inline-block; */
+}
+
+.dropDownSelectedX:hover {
+  background-color: red;
+}
 
 /* These will need to be reworked -- being used for the Spellbook Filter */
 .test1 {
+  display: inline-block;
   border-style: solid;
-  border-color: #000000;
+  border-width: 2px;
+  /* border-color: #000000; */
+  border-radius: 5px;
   margin-left: 15px;
   margin-right: 15px;
   width: 200px;
+  overflow: hidden;
+  position: relative;
 }
+
+.test1 p {
+  float: left;
+  margin: 0;
+  padding: 0;
+}
+
 .test2 {
   border-style: solid;
-  border-color: #000000;
-  background-color: #ABA387;
+  border-width: 2px;
+  /* border-color: #000000; */
+  background-color: #ffffff;
   margin-left: 15px;
   margin-right: 15px;
   width: 200px;
@@ -202,13 +282,8 @@ code {
 }
 
 .testx {
-  /* display: flex; */
   margin-left: 15px;
   margin-right: 15px;
   width: 200px;
+  /* position: absolute; */
 }
-
-/* .test {
-  This lets us floar a component over another one...
-  position: absolute;
-} */
