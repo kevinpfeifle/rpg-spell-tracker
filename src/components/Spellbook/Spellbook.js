@@ -1,5 +1,6 @@
 import Spell from '../Spell/Spell';
 import Header from './components/Header';
+import Filter from './components/Filter/Filter';
 import {Link} from 'react-router-dom';
 
 /**
@@ -16,6 +17,7 @@ import {Link} from 'react-router-dom';
 const Spellbook = ({spells, sorting}) => {
     return (
         <div className='spellbook'>
+            <Filter />
             <Header spells={spells} sorting={sorting} />
             {
                 spells.map((spell) =>  (
