@@ -70,8 +70,8 @@ class DropDown extends React.Component {
         }
 
         return (
-            <div ref={(container) => this.container = container} className='testx'>
-                <div className='test1' onClick={() => this.setState({...this.state, focused: !this.state.focused})}>
+            <div ref={(container) => this.container = container} className='dropDown'>
+                <div className='dropDownContainer' onClick={() => this.setState({...this.state, focused: !this.state.focused})}>
                     {!this.state.selectItems.some((item) => item.selected) && (<p>{this.props.defaultText}</p>)}
                     <DropDownBox selectItems={this.state.selectItems} remove={handleRemove}/>
                     <div className='dropDownX' onClick={deselectAll}>
@@ -79,7 +79,7 @@ class DropDown extends React.Component {
                     </div>
                 </div>
                 {
-                    (this.state.focused) && <div className='test2'>
+                    (this.state.focused) && <div className='dropDownList'>
                         {
                             this.state.selectItems.map((item) => (
                                 <DropDownItem key={item.value} text={item.text} value={item.value} selected={item.selected} onSelect={handleSelect} />

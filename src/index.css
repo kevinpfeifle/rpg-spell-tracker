@@ -12,15 +12,11 @@ code {
     monospace;
 }
 
+/* Styling for the Spellbook components */
 .spellbook {
   margin: auto;
-  /* border-style: solid;
-  border-color: #6E6856; */
   margin: 0;
-  /* padding-left: 15px; */
-  /* padding: 0; */
   overflow: auto;
-  /* background-color: #333; */
 }
 
 .spellbookHeader {
@@ -140,25 +136,6 @@ code {
   width: 200px;
   flex-wrap: wrap;
 }
-/* .spellRef ul {
-  list-style-type: none;
-  margin: 0;
-  padding-left: 15px;
-  overflow: hidden;
-  background-color: #f4f4f4;
-}
-
-.spellRef li {
-  float: left;
-  padding-right: 30px;
-}
-
-.spellRef li h4 {
-  display: block;
-  padding: 8px;
-  color: #333;
-} */
-
 .spellDesc {
   border-style: solid;
   border-color: #ABA387;
@@ -178,24 +155,53 @@ code {
   padding: 0;
 }
 
+/* Styling for the Custom Multi-DropDown Component */
+.dropDown {
+  margin-left: 15px;
+  margin-right: 15px;
+  width: 200px;
+}
+
+.dropDownContainer {
+  display: inline-block;
+  border-style: solid;
+  border-width: 2px;
+  border-radius: 5px;
+  margin-left: 15px;
+  margin-right: 15px;
+  padding-left: 2px;
+  width: 200px;
+  overflow: hidden;
+  position: relative;
+}
+
+.dropDownContainer p {
+  float: left;
+  margin: 0;
+  padding: 0;
+}
+
+.dropDownList {
+  border-style: solid;
+  border-bottom: none;
+  border-width: 2px;
+  background-color: #ffffff;
+  margin-left: 15px;
+  margin-right: 15px;
+  width: 200px;
+  position: absolute;
+}
+
 .dropDownX {
-  /* float: right; */
-  /* position:absolute; */
-  /* clear:both; */
-  /* padding-top: 4px; */
   margin: auto;
-  /* margin-left: 5px; */
   border-left: solid;
   border-width: 2px;
   height: 100%;
-    /* width: 50%; */
-    position: absolute;
-    right: 0;
-    top: 0;
-    display: flex;
+  position: absolute;
+  right: 0;
+  top: 0;
+  display: flex;
   align-items: center
-  /* overflow: hidden; */
-  /* display: inline-block; */
 }
 
 .dropDownX:hover {
@@ -203,10 +209,14 @@ code {
 }
 
 .dropDownItem p {
-  /* float: left; */
   border-bottom: solid;
+  border-width: 2px;
   margin: 0;
   padding: 0;
+}
+
+.dropDownItem p:hover {
+  background-color: lightblue;
 }
 
 .dropDownBox {
@@ -228,62 +238,27 @@ code {
   float: left;
   margin: 0;
   padding: 0;
-  /* padding-right: 10px; */
-  /* display: inline-block; */
+  font-size: 12px;
 }
 
 .dropDownSelectedX {
   float: right;
-  padding-top: 4px;
   margin: auto;
   margin-left: 5px;
   border-left: solid;
   border-width: 2px;
-  /* display: inline-block; */
+}
+
+#dropDownSelectedXButton {
+  height:12px;
 }
 
 .dropDownSelectedX:hover {
   background-color: red;
 }
 
-/* These will need to be reworked -- being used for the Spellbook Filter */
-.test1 {
-  display: inline-block;
-  border-style: solid;
-  border-width: 2px;
-  /* border-color: #000000; */
-  border-radius: 5px;
-  margin-left: 15px;
-  margin-right: 15px;
-  width: 200px;
-  overflow: hidden;
-  position: relative;
-}
-
-.test1 p {
-  float: left;
-  margin: 0;
-  padding: 0;
-}
-
-.test2 {
-  border-style: solid;
-  border-width: 2px;
-  /* border-color: #000000; */
-  background-color: #ffffff;
-  margin-left: 15px;
-  margin-right: 15px;
-  width: 200px;
-  position: absolute;
-}
-
+/* Styling for the Spellbook Filter */
 .test {
   display: flex;
 }
 
-.testx {
-  margin-left: 15px;
-  margin-right: 15px;
-  width: 200px;
-  /* position: absolute; */
-}

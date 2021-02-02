@@ -14,7 +14,7 @@ const DropDownSelected = ({value, text, remove}) => {
         <div className='dropDownSelected'>
             <p>{text}</p>
             <div className='dropDownSelectedX' onClick={removeItem}>
-                <RiCloseLine />
+                <RiCloseLine id='dropDownSelectedXButton'/>
             </div>
         </div>
     )
