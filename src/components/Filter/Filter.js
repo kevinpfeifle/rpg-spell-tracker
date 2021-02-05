@@ -3,6 +3,7 @@ import DropDown from '../DropDown/DropDown';
 import React from 'react'
 
 /** 
+ * Component which creates flexible filter UIs. The filter objects passed into the components are expected to be in the following format (DropDown filter as example):
  * {
  *      name: 'Filter Name',
  *      filterType: 'Select',
@@ -11,7 +12,9 @@ import React from 'react'
  *          selectItems: [Selection Items]
  *      }
  * }
- * 
+ * @param {Array} props.filters array of filter objects to be used in creating the filter.
+ * @param {Function} props.filterFunc function to be called whenever a filter is updated, used to update the UI and filter components out/in.
+ * @returns the created component.
  */
 class Filter extends React.Component {
     constructor(props) {
@@ -21,6 +24,12 @@ class Filter extends React.Component {
         };
     }
     
+    /**
+     * Function to make changes to the stored filter state for a DropDown component. Calls the prop filter function after state is set. 
+     * @param {String} name name of the selection component
+     * @param {Number} selectCount running tally of items selected
+     * @param {Array} selectItems array of objects for the selection component
+     */
     handleFilterUpdate = (name, selectCount, selectItems) => {
         let updatedFilters = JSON.parse(JSON.stringify(this.state.filters));
         for (let filter of updatedFilters) {
@@ -37,6 +46,10 @@ class Filter extends React.Component {
         });
     }
 
+    /**
+     * Function to make changes to the stored filter state for a Text Input component. Calls the prop filter function after state is set. 
+     * @param {Object} event the event passed from the Input component onChange.
+     */
     handleTextUpdate = (event) => {
         let updatedFilters = JSON.parse(JSON.stringify(this.state.filters));
         for (let filter of updatedFilters) {
