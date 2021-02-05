@@ -165,7 +165,7 @@ code {
 .dropDownContainer {
   display: inline-block;
   border-style: solid;
-  border-width: 2px;
+  border-width: 1px;
   border-radius: 5px;
   margin-left: 15px;
   margin-right: 15px;
@@ -179,12 +179,14 @@ code {
   float: left;
   margin: 0;
   padding: 0;
+  font-size: 14px;
+  color: gray;
 }
 
 .dropDownList {
   border-style: solid;
   border-bottom: none;
-  border-width: 2px;
+  border-width: 1px;
   background-color: #ffffff;
   margin-left: 15px;
   margin-right: 15px;
@@ -195,7 +197,7 @@ code {
 .dropDownX {
   margin: auto;
   border-left: solid;
-  border-width: 2px;
+  border-width: 1px;
   height: 100%;
   position: absolute;
   right: 0;
@@ -210,9 +212,11 @@ code {
 
 .dropDownItem p {
   border-bottom: solid;
-  border-width: 2px;
+  border-width: 1px;
   margin: 0;
   padding: 0;
+  font-size: 14px;
+  color: #000000;
 }
 
 .dropDownItem p:hover {
@@ -229,7 +233,7 @@ code {
   display: inline-block;
   margin: 1px;
   border-style: solid;
-  border-width: 2px;
+  border-width: 1px;
   border-radius: 5px;
   padding-left: 2px;
 }
@@ -239,6 +243,7 @@ code {
   margin: 0;
   padding: 0;
   font-size: 12px;
+  color: #000000;
 }
 
 .dropDownSelectedX {
@@ -246,7 +251,7 @@ code {
   margin: auto;
   margin-left: 5px;
   border-left: solid;
-  border-width: 2px;
+  border-width: 1px;
 }
 
 #dropDownSelectedXButton {
@@ -258,7 +263,7 @@ code {
 }
 
 /* Styling for the Spellbook Filter */
-.test {
+.Filter {
   display: flex;
 }
 
