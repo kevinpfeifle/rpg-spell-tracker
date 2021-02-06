@@ -1,5 +1,5 @@
 // React imports
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 
 // Util imports
 import {mapSpellLevel} from '../../../utils/spellTransforms';

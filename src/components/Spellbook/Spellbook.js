@@ -1,6 +1,6 @@
 import Spell from '../Spell/Spell';
 import Header from './components/Header';
-import Filter from './components/Filter/Filter';
+import SpellFilter from './components/SpellFilter';
 import {Link} from 'react-router-dom';
 
 /**
@@ -14,13 +14,13 @@ import {Link} from 'react-router-dom';
  * @param {Array} props.spells array of spells to be rendered by the spellbook
  * @returns the created component.
  */
-const Spellbook = ({spells, sorting}) => {
+const Spellbook = ({spells, pureSpells, sorting, filter}) => {
     return (
         <div className='spellbook'>
-            <Filter />
+            <SpellFilter spells={spells} pureSpells={pureSpells} filterFunc={filter} />
             <Header spells={spells} sorting={sorting} />
             {
-                spells.map((spell) =>  (
+                spells.map((spell) => (
                     <Spell key={spell.id} spell={spell} />
                 ))
             }

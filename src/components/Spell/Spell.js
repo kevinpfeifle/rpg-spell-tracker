@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import SpellRef from './components/SpellRef';
 import SpellDesc from './components/SpellDesc';
 
