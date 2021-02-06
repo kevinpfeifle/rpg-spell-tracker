@@ -70,7 +70,7 @@ class App extends React.Component {
             path='/sample-spellbook' 
             render={() => {
               // To ensure the spellbook as spell props on render, show a spinning loading image until all least one spell is ready for display.
-              return (this.state.spells.length > 0) ?
+              return (this.state.pureSpells.length > 0) ?
                 (<Spellbook spells={this.state.spells} pureSpells={this.state.pureSpells} sorting={this.sortSpells} filter={this.filterSpells}/>)
                 : (<img className='Loading' src={ReactLogo} alt='Loading...' style={{width:'250px', height:'250px'}}/>)
             }} 
