@@ -9,13 +9,7 @@
 /coverage
 
 # production
-/build
-
-# git workflows
-/.github
-
-# firebase
-/.firebase
+/client/build
 
 # misc
 .DS_Store
