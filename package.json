@@ -1,4 +1,8 @@
 {
   "private": true,
-  "workspaces": ["rpgtool-client", "rpgtool-server"]
+  "workspaces": ["rpgtool-client", "rpgtool-server"],
+  "scripts": {
+    "client-start": "cd ./client & yarn start",
+    "server-start": "cd ./server & yarn start"
+  }
 }
