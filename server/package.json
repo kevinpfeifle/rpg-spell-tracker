@@ -1,0 +1,13 @@
+{
+  "name": "rpgtool-server",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+    "config": "^3.3.3",
+    "express": "^4.17.1",
+    "pg": "^8.5.1"
+  },
+  "scripts": {
+    "start": "node index.js"
+  }
+}
