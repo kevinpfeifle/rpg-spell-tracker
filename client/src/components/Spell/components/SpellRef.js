@@ -29,20 +29,22 @@ const SpellRef = ({spell, toggleVisibility}) => {
     return (
         <div className='spellRef' onClick={onClick}>
             <div className='spellName'>
-                <h4>{spell.spellName}</h4>
+                <h4>{spell.spell_name}</h4>
                 {(setNameTips().length > 0) && <h5><em>{setNameTips().toString()}</em></h5>}
             </div>
             <div className='spellLevel'>
-                <h4>{mapSpellLevel(spell.spellLevel)}</h4>
+                <h4>{mapSpellLevel(spell.spell_level)}</h4>
             </div>
             <div className='spellSchool'>
-                <h4>{spell.spellSchool}</h4>
+                <h4>{spell.spell_school}</h4>
             </div>
             <div className='spellAttack'>
-                <h4>{spell.spellAttack}</h4>
+                {(spell.spell_attack != null) && <h4>{spell.spell_attack}</h4>}
+                {(spell.spell_save != null) && <h4>{spell.spell_save}</h4>}
             </div>
             <div className='spellEffect'>
-                <h4>{spell.spellEffect}</h4>
+            {(spell.spell_effects != null && spell.spell_effects.length > 1) && <h4>{spell.spell_effects[0] + ' +'}</h4>}
+            {(spell.spell_effects != null) && <h4>{spell.spell_effects[0]}</h4>}
             </div>
             {(expandIcon) && <RiAddLine className='expandSpell' />}
             {(!expandIcon) && <RiSubtractLine className='expandSpell' />}

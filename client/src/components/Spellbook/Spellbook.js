@@ -18,10 +18,10 @@ const Spellbook = ({spells, pureSpells, sorting, filter}) => {
     return (
         <div className='spellbook'>
             <SpellFilter spells={spells} pureSpells={pureSpells} filterFunc={filter} />
-            <Header spells={spells} sorting={sorting} />
+            <Header sorting={sorting} />
             {
                 spells.map((spell) => (
-                    <Spell key={spell.id} spell={spell} />
+                    <Spell key={spell.spell_id} spell={spell} />
                 ))
             }
             <Link to="/">Go back</Link>

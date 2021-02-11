@@ -8,19 +8,19 @@ import {mapSpellLevel} from '../../../utils/spellTransforms';
 const SpellDesc = ({spell}) => {
     return (
         <div className='spellDesc'>
-            <h2>{spell.spellName}</h2>
-            <p><em>{mapSpellLevel(spell.spellLevel).toLowerCase()} {spell.spellSchool.toLowerCase()} {spell.ritual && '(ritual)'}</em></p>
-            <p><strong>Casting Time:</strong> {spell.castingTime}</p>
-            <p><strong>Range:</strong> {spell.range}</p>
+            <h2>{spell.spell_name}</h2>
+            <p><em>{mapSpellLevel(spell.spell_level).toLowerCase()} {spell.spell_school.toLowerCase()} {spell.ritual && '(ritual)'}</em></p>
+            <p><strong>Casting Time:</strong> {spell.casting_time}</p>
+            <p><strong>Range:</strong> {spell.spell_range}</p>
             <p>
                 <strong>Components: </strong> 
-                {spell.components.toString()} { spell.hasOwnProperty('materialComponents') && '(' + spell.materialComponents + ')'}
+                {spell.spell_components.toString()} {(spell.material_components != null) && '(' + spell.material_components + ')'}
             </p>
             <p><strong>Duration:</strong> {spell.duration}</p>
-            <p><strong>Classes:</strong> {spell.classes}</p>
+            <p><strong>Classes:</strong> {spell.classes.toString()}</p>
             <p>{spell.description}</p> {/* Description (This could be broken up into some simpler, like a quick reference of spell type and dice to roll?) */}
             {
-                spell.hasOwnProperty('higherLevels') && (<p><strong>At Higher Levels:</strong> {spell.higherLevels}</p>)
+                spell.hasOwnProperty('description_higher_levels') && (<p><strong>At Higher Levels:</strong> {spell.description_higher_levels}</p>)
             }
         </div>
     );

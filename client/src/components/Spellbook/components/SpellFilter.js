@@ -40,16 +40,16 @@ class SpellFilter extends React.Component {
             if (curFilter.filterType === 'input') {
                 // If it is a input field, check the text filter, which matches substrings provided in input textbox.
                 if (curFilter.filter.textValue !== '') {
-                    filteredSpells = filteredSpells.filter((spell) => spell.spellName.toLowerCase().includes(curFilter.filter.textValue.toLowerCase()));
+                    filteredSpells = filteredSpells.filter((spell) => spell.spell_name.toLowerCase().includes(curFilter.filter.textValue.toLowerCase()));
                 }
             } else if (curFilter.filterType === 'select') {
                 // If it is a dropdown select, check the selected items from the dropdowns.
                 if (curFilter.filter.selectCount === 0) continue;
                 else {
                     if (curFilter.name === 'Spell Level') {
-                        filteredSpells = checkSelectFilters(filteredSpells, curFilter, 'spellLevel');
+                        filteredSpells = checkSelectFilters(filteredSpells, curFilter, 'spell_level');
                     } else if (curFilter.name === 'Spell School') {
-                        filteredSpells = checkSelectFilters(filteredSpells, curFilter, 'spellSchool');
+                        filteredSpells = checkSelectFilters(filteredSpells, curFilter, 'spell_school');
                     }
                 }
             }
@@ -95,8 +95,8 @@ class SpellFilter extends React.Component {
         let spellLevelFilters = [];
         let spellSchoolFilters = [];
         spellList.forEach((spell) => {
-            if (!spellLevelFilters.includes(spell.spellLevel)) spellLevelFilters.push(spell.spellLevel);
-            if (!spellSchoolFilters.includes(spell.spellSchool)) spellSchoolFilters.push(spell.spellSchool);
+            if (!spellLevelFilters.includes(spell.spell_level)) spellLevelFilters.push(spell.spell_level);
+            if (!spellSchoolFilters.includes(spell.spell_school)) spellSchoolFilters.push(spell.spell_school);
         });
         spellLevelFilters.forEach((levelFilter) => {
             spellFilters[1].filter.selectItems.push({

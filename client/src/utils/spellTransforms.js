@@ -11,11 +11,11 @@ function spellSorting(spellList, sortField, reverse) {
     // Default sort organizes first by spell level descending, then by spell name alphabetically.
     const defaultSort = (a, b, sortDir) => {
         sortDir = (sortDir == null) ? 1 : sortDir;
-        if (a.spellLevel < b.spellLevel) return -sortDir;
-        else if (a.spellLevel > b.spellLevel) return sortDir;
+        if (a.spell_level < b.spell_level) return -sortDir;
+        else if (a.spell_level > b.spell_level) return sortDir;
         else {
-            if (a.spellName < b.spellName) return -1;
-            else if (a.spellName > b.spellName) return 1;
+            if (a.spell_name < b.spell_name) return -1;
+            else if (a.spell_name > b.spell_name) return 1;
             else return 0;
         }
     };
@@ -24,33 +24,54 @@ function spellSorting(spellList, sortField, reverse) {
         case 'spellName':
             // Sorts alphabetically by spell name.
             sortedSpells.sort((a, b) => {
-                if (a.spellName < b.spellName) return -sortDirection;
-                else if (a.spellName > b.spellName) return sortDirection;
+                if (a.spell_name < b.spell_name) return -sortDirection;
+                else if (a.spell_name > b.spell_name) return sortDirection;
                 else return 0;
             });
             break;
         case 'spellSchool':
             // Sorts by spell school, and then by default sort.
             sortedSpells.sort((a, b) => {
-                if (a.spellSchool < b.spellSchool) return -sortDirection;
-                else if (a.spellSchool > b.spellSchool) return sortDirection;
+                if (a.spell_school < b.spell_school) return -sortDirection;
+                else if (a.spell_school > b.spell_school) return sortDirection;
                 else return defaultSort(a, b);
             });
             break;
         case 'spellAttack':
             // Sorts by spell attack/save, and then by default sort.
             sortedSpells.sort((a, b) => {
-                if (a.spellAttack < b.spellAttack) return -sortDirection;
-                else if (a.spellAttack > b.spellAttack) return sortDirection;
-                else return defaultSort(a, b);
+                if (a.spell_attack != null) {
+                    if (b.spell_attack != null) {
+                        if (a.spellAttack < b.spellAttack) return -sortDirection;
+                        else if (a.spellAttack > b.spellAttack) return sortDirection;
+                        else return defaultSort(a, b);
+                    } else return -sortDirection
+                } else if (a.spell_save != null) {
+                    if (b.spell_attack != null) return sortDirection;
+                    else if (b.spell_save != null) {
+                        if (a.spell_save < b.spell_save) return -sortDirection;
+                        else if (a.spell_save > b.spell_save) return sortDirection;
+                        else return defaultSort(a, b);
+                    } else return -sortDirection
+                } else {
+                    if (b.spell_attack == null && b.spell_save == null) return defaultSort(a, b);
+                    else return sortDirection;
+                } 
             });
             break;
         case 'spellEffect':
             // Sorts by spell damage/effect, and then by default sort.
             sortedSpells.sort((a, b) => {
-                if (a.spellEffect < b.spellEffect) return -sortDirection;
-                else if (a.spellEffect > b.spellEffect) return sortDirection;
-                else return defaultSort(a, b);
+                if (a.spell_effects != null) {
+                    if (b.spell_effects != null) {
+                        if (a.spell_effects[0] < b.spell_effects[0]) return -sortDirection;
+                        else if (a.spell_effects[0] > b.spell_effects[0]) return sortDirection;
+                        else return defaultSort(a, b);
+                    } else return -sortDirection;
+                } else {
+                    if (b.spell_effects == null) return defaultSort(a, b);
+                    else return sortDirection
+                }
             });
             break;
         default:

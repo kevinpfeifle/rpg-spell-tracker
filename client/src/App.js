@@ -3,8 +3,8 @@ import React from 'react'
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import ReactLogo from './d20.png';
 
-// DB imports
-import {fetchSpell, fetchSpells} from './database/db';
+// API imports
+import {getPureSpells} from './apis/spellAPI';
 
 // Component imports
 import UnderConstruction from './components/UnderConstruction';
@@ -37,16 +37,17 @@ class App extends React.Component {
   // GETs the spell list and sorts before setting it to state.
    getSpells = () => {
      return new Promise(async (resolve, reject) => {
-       const spellsFromServer = await fetchSpells();
-       resolve(spellSorting(spellsFromServer));
+       await getPureSpells().then((spellsFromServer) => {
+         resolve(spellSorting(spellsFromServer));
+        });
       });
   };
 
   // Callback function to be executed by Spellbook Header component on rerender of state.
-  sortSpells = (spells, sortField, sortDirection) => {
+  sortSpells = (sortField, sortDirection) => {
     this.setState({
       ...this.state,
-      spells: spellSorting(spells, sortField, sortDirection)
+      spells: spellSorting(this.state.spells, sortField, sortDirection)
     });
   };
 
