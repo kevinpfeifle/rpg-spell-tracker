@@ -2,7 +2,6 @@ import axios from 'axios';
 
 function getPureSpells() {
     return new Promise((resolve, reject) => {
-        console.log(process.env)
         /**
          * @TODO Create configuration for this endpoint -- hardcoding it for now.
          */
