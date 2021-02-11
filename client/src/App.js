@@ -1,7 +1,7 @@
 // React imports
 import React from 'react'
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-import ReactLogo from './d20.png';
+import ReactLogo from './vendor/d20.png';
 
 // API imports
 import {getPureSpells} from './apis/spellAPI';
