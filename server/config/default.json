@@ -7,6 +7,6 @@
         // "port": DB_PORT
     },
     "expressServer": {
-        "port": 3000
+        "port": 4000
     }
 }
