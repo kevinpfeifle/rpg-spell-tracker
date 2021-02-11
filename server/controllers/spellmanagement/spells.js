@@ -7,7 +7,7 @@ const router = require('express').Router();
 const spells = require('./models/spells');
 
 /**
- * The router for the "spells" path of spellmanagement. Queries the DB to fetch a single spell.
+ * The router for the "spells" path of spellmanagement. Queries the DB to fetch a single spell if spell id provided, otherwise sends ALL spells.
  * Accepts a GET request with the query string parameter "spellid"
  */
 router.get('/', (req, res) => {
@@ -24,8 +24,28 @@ router.get('/', (req, res) => {
                     'error': err
                 });
             });
-        } else res.status(204).send();
-    } else res.status(204).send();
+        } else {
+            spells.fetchAllSpells().then((results) => {
+                res.status(200).json({
+                    'spells': results
+                });
+            }).catch((err) => {
+                res.status(200).json({
+                    'error': err
+                });
+            });
+        }
+    } else {
+        spells.fetchAllSpells().then((results) => {
+            res.status(200).json({
+                'spells': results
+            });
+        }).catch((err) => {
+            res.status(200).json({
+                'error': err
+            });
+        });
+    }
 });
 
 module.exports = router;
