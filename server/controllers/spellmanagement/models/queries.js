@@ -1,8 +1,8 @@
 'use strict'
 
-const fetchSpellById = `select * from spell.spells where spell_id = $1;`;
+const fetchSpellById = `select * from spell.spell where spell_id = $1;`;
 
-const fetchAllSpells = `select * from spell.spells;`;
+const fetchAllSpells = `select * from spell.spell;`;
 
 module.exports = {
     fetchSpellById: fetchSpellById,
