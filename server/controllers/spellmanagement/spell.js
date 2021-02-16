@@ -4,7 +4,7 @@
 const router = require('express').Router();
 
 // Internal imports for our models.
-const spells = require('./models/spells');
+const spell = require('./models/spell');
 
 /**
  * The router for the "spells" path of spellmanagement. Queries the DB to fetch a single spell if spell id provided, otherwise sends ALL spells.
@@ -13,7 +13,7 @@ const spells = require('./models/spells');
 router.get('/', (req, res) => {
     if (req.query != null) {
         if (req.query.spellid != null) {
-            spells.fetchSpellById(parseInt(req.query.spellid)).then((results) => {
+            spell.fetchSpellById(parseInt(req.query.spellid)).then((results) => {
                 if (results) {
                     res.status(200).json({
                         'spell': results
@@ -25,7 +25,7 @@ router.get('/', (req, res) => {
                 });
             });
         } else {
-            spells.fetchAllSpells().then((results) => {
+            spell.fetchAllSpells().then((results) => {
                 res.status(200).json({
                     'spells': results
                 });
@@ -36,7 +36,7 @@ router.get('/', (req, res) => {
             });
         }
     } else {
-        spells.fetchAllSpells().then((results) => {
+        spell.fetchAllSpells().then((results) => {
             res.status(200).json({
                 'spells': results
             });
