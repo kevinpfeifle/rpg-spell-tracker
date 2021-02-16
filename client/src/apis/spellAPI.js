@@ -1,12 +1,12 @@
 import axios from 'axios';
 
-function getPureSpells() {
+function getSpellbook(spellbookId) {
     return new Promise((resolve, reject) => {
         /**
          * @TODO Create configuration for this endpoint -- hardcoding it for now.
          */
-        axios.get('http://localhost:4000/spellmanagement/spells').then((res) => {
-            resolve(res.data.spells);
+        axios.get('http://localhost:4000/spellmanagement/spellbook?spellbookid=' + spellbookId).then((res) => {
+            resolve(res.data.spellbook.spells);
         }).catch((err) => {
             console.log(err);
             reject(err);
@@ -15,5 +15,5 @@ function getPureSpells() {
 }
 
 export {
-    getPureSpells
+    getSpellbook
 };
