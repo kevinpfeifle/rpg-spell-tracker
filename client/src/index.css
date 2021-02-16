@@ -5,6 +5,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #322F3D;
 }
 
 code {
@@ -12,27 +13,86 @@ code {
     monospace;
 }
 
-/* Styling for the Spellbook components */
 .spellbook {
+  display: grid;
   margin: auto;
-  margin: 0;
+  justify-content: center;
+  /* min-width: 1200px;
+  max-width: 1200px; */
+  width: 1180px;
+}
+
+.spellbookTab {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  padding: 0;
+  background-color: #59405C;
+}
+
+.tabButton {
+  background-color: #59405C;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
+
+.tabButton:hover {
+  background-color: #6a536c;
+}
+
+.tabButton:active, .tabButton:focus {
+  outline: 0;
+  border: none;
+}
+
+.tabButtonSelected {
+  background-color: #47334a;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border-bottom: 4px solid #87556f;
+}
+
+.tabButtonSelected:active, .tabButtonSelected:focus {
+  outline: 0;
+}
+
+/* Styling for the Spellbook components */
+.spellbookPage {
+  display: block;
   overflow: auto;
+  border: 1px solid black;
+  background-color: #3c4a52;
+}
+
+#noSpells {
+  color: #dddddd;
+  text-align: center;
 }
 
 .spellbookHeader {
-  display: flex;
+  display: grid;
   margin: 0;
   /* padding-left: 15px; */
   /* padding: 0; */
   overflow: hidden;
-  background-color: #6E6856;
+  background-color: #4B5D67;
+  grid-template-columns: 400px 125px 175px 200px 250px;
 }
 
 .spellbookHeader .headerSpellName {
   color: #dddddd;
   margin-left: 15px;
   margin-right: 15px;
-  width: 500px;
+  /* width: 500px; */
   flex-wrap: wrap;
   display: flex;
   cursor: pointer;
@@ -42,7 +102,7 @@ code {
   color: #dddddd;
   margin-left: 15px;
   margin-right: 15px;
-  width: 150px;
+  /* width: 150px; */
   flex-wrap: wrap;
   display: flex;
   cursor: pointer;
@@ -52,7 +112,7 @@ code {
   color: #dddddd;
   margin-left: 15px;
   margin-right: 15px;
-  width: 200px;
+  /* width: 200px; */
   flex-wrap: wrap;
   display: flex;
   cursor: pointer;
@@ -62,7 +122,7 @@ code {
   color: #dddddd;
   margin-left: 15px;
   margin-right: 15px;
-  width: 200px;
+  /* width: 200px; */
   flex-wrap: wrap;
   display: flex;
   cursor: pointer;
@@ -72,7 +132,7 @@ code {
   color: #dddddd;
   margin-left: 15px;
   margin-right: 15px;
-  width: 250px;
+  /* width: 250px; */
   flex-wrap: wrap;
   display: flex;
   cursor: pointer;
@@ -84,24 +144,28 @@ code {
 }
 
 .expandSpell {
-  margin-top: 25px;
+  display: inline-block;
+  width: auto;
 }
 
 .spellRef {
-  display: flex;
-  border-top: solid;
+  display: grid;
+  grid-template-columns: 400px 125px 175px 200px 150px auto auto;
+  /* border-top: solid;
   border-bottom: solid;
-  border-color: #89826C;
-  margin-top: 1px;
-  margin-bottom: 1px;
+  border-color: #3c4a52; */
+  background-color: #5F6A70;
+  margin-top: 2px;
+  margin-bottom: 2px;
   cursor: pointer;
+  align-items: center;
 }
 
 .spellRef .spellName {
   display: flex;
   margin-left: 15px;
   margin-right: 15px;
-  width: 500px;
+  /* width: 500px; */
   flex-wrap: wrap;
 }
 
@@ -112,35 +176,58 @@ code {
 .spellRef .spellLevel {
   margin-left: 15px;
   margin-right: 15px;
-  width: 150px;
+  /* width: 150px; */
   flex-wrap: wrap;
 }
 
 .spellRef .spellSchool {
   margin-left: 15px;
   margin-right: 15px;
-  width: 200px;
+  /* width: 200px; */
   flex-wrap: wrap;
 }
 
 .spellRef .spellAttack {
   margin-left: 15px;
   margin-right: 15px;
-  width: 200px;
+  /* width: 200px; */
   flex-wrap: wrap;
 }
 
 .spellRef .spellEffect {
   margin-left: 15px;
   margin-right: 15px;
-  width: 200px;
+  /* width: 200px; */
   flex-wrap: wrap;
 }
+
+.spellButton {
+  display: inline-block;
+  width: auto;
+  background-color: #59405C;
+  border: none;
+  color: white;
+  margin-left: 20px;
+  margin-right: 20px;
+  padding: 7px 16px;
+  text-align: center;
+  text-decoration: none;
+}
+
+.spellButton:hover {
+  background-color: #6a536c;
+}
+
+.spellButton:active, .spellButton:focus {
+  outline: 0;
+  border: none;
+}
+
 .spellDesc {
-  border-style: solid;
-  border-color: #ABA387;
+  /* border-style: solid;
+  border-color: #3c4a52; */
   display: block;
-  background: #D6CCA9;
+  background: #5F6A70;
   margin: 5px;
   padding: 10px 20px;  
 }
@@ -265,15 +352,13 @@ code {
 /* Styling for the Spellbook Filter */
 .Filter {
   display: flex;
+  background-color: #4B5D67;
 }
 
 .Loading {
   animation: spin 2s linear infinite;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  margin-top: -150px;
-  margin-left: -150px;
+  margin: auto;
+  justify-content: center;
 }
 
 @keyframes spin {

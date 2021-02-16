@@ -20,12 +20,19 @@ const SpellRef = ({spell, toggleVisibility}) => {
         setExpandIcon(!expandIcon);
         toggleVisibility();
     };
+
     const setNameTips = () => {
         let nameTips = [];
         if (spell.concentration) nameTips.push('C');
         if (spell.ritual) nameTips.push('R');
         return nameTips;
     };
+
+    const handleClick = (e) => {
+        e.stopPropagation(); // Ensures clicking this subcomponent does not trigger parent onclick.
+       // Continue with functionality here...
+    }
+
     return (
         <div className='spellRef' onClick={onClick}>
             <div className='spellName'>
@@ -43,11 +50,12 @@ const SpellRef = ({spell, toggleVisibility}) => {
                 {(spell.spell_save != null) && <h4>{spell.spell_save}</h4>}
             </div>
             <div className='spellEffect'>
-            {(spell.spell_effects != null && spell.spell_effects.length > 1) && <h4>{spell.spell_effects[0] + ' +'}</h4>}
+            {(spell.spell_effects != null && spell.spell_effects.length > 1) && <h4>{spell.spell_effects[0] + ' (+)'}</h4>}
             {(spell.spell_effects != null) && <h4>{spell.spell_effects[0]}</h4>}
             </div>
             {(expandIcon) && <RiAddLine className='expandSpell' />}
             {(!expandIcon) && <RiSubtractLine className='expandSpell' />}
+            <button className='spellButton' onClick={handleClick}>Prepare</button>
         </div>
     );
 };
