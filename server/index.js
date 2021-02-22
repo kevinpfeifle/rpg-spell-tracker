@@ -16,6 +16,7 @@ let corsOptions = {
 };
 let port = config.get('expressServer.port');
 app.use(cors(corsOptions));
+app.use(express.json());
 app.listen(port, () => {
     db.init(config.get('dbCredentials'));
     console.log(`RPG Tool Server running on port: ${port}`);

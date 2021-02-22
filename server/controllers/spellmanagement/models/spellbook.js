@@ -19,6 +19,18 @@ function fetchSpellbookById(spellId) {
     });
 }
 
+function updateSpellbookSpell(input) {
+    return new Promise((resolve, reject) => {
+        let query = queries.updateSpellbookSpell;
+        db.executeQuery(query, [input.spellPrepared, input.sender, new Date(), input.spellbookId, input.spellId]).then((results) => {
+            resolve(results);
+        }).catch((err) => {
+            reject(err);
+        });
+    });
+}
+
 module.exports = {
-    fetchSpellbookById: fetchSpellbookById
+    fetchSpellbookById: fetchSpellbookById,
+    updateSpellbookSpell: updateSpellbookSpell
 };
