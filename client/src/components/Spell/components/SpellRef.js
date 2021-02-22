@@ -13,7 +13,7 @@ import { RiAddLine, RiSubtractLine } from "react-icons/ri";
  * @param {Function} props.toggleVisibility onclick function to flip the state of the associated SpellDesc component
  * @returns the created component.
  */
-const SpellRef = ({spell, toggleVisibility}) => {
+const SpellRef = ({spell, toggleVisibility, buttonName, buttonClick}) => {
     const [expandIcon, setExpandIcon] = useState(true);
 
     const onClick = () => {
@@ -31,6 +31,12 @@ const SpellRef = ({spell, toggleVisibility}) => {
     const handleClick = (e) => {
         e.stopPropagation(); // Ensures clicking this subcomponent does not trigger parent onclick.
        // Continue with functionality here...
+       buttonClick(spell);
+    }
+    const checkButtonDisplay = () => {
+        if (spell.spell_level === 0) return false;
+        else if (buttonName === 'Prepare') return !spell.spell_prepared;
+        else return true; 
     }
 
     return (
@@ -55,7 +61,7 @@ const SpellRef = ({spell, toggleVisibility}) => {
             </div>
             {(expandIcon) && <RiAddLine className='expandSpell' />}
             {(!expandIcon) && <RiSubtractLine className='expandSpell' />}
-            <button className='spellButton' onClick={handleClick}>Prepare</button>
+            {(checkButtonDisplay()) && <button className='spellButton' onClick={handleClick}>{buttonName}</button>}
         </div>
     );
 };

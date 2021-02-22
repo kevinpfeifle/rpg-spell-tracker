@@ -25,7 +25,7 @@ class Spell extends React.Component {
     renderKnownSpell() {
         return (
             <div>
-                <SpellRef spell={this.props.spell} toggleVisibility={this.toggleVisibility} />
+                <SpellRef spell={this.props.spell} toggleVisibility={this.toggleVisibility} buttonName={this.props.buttonName} buttonClick={this.props.buttonClick} />
                 {this.state.spellVis && <SpellDesc spell={this.props.spell}/>}
             </div>
         )

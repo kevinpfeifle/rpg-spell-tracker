@@ -6,9 +6,6 @@ import Spell from '../../Spell/Spell';
 import Header from './Header';
 import SpellFilter from './SpellFilter';
 
-// Util imports
-import {spellSorting} from '../../../utils/spellTransforms';
-
 /**
  * @todo
  * Need to show a sortable header icon, as well as each available spell in the spellbook.
@@ -24,33 +21,47 @@ class SpellbookPage extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            spells: props.spells
+            sortField: 'spellLevel',
+            sortDirection: false
         }
     }
 
-    sortSpells = (sortField, sortDirection) => {
-        this.setState({
-            ...this.state,
-            spells: spellSorting(this.state.spells, sortField, sortDirection)
-        });
+    filterSpells = (spells) => {
+        this.props.filter(this.props.pageType, spells);
     };
 
-    filterSpells = (spells) => {
-        this.setState({
-            ...this.state,
-            spells: spells
-        });
-    };
+    sortPageSpells(sortCol) {
+        if (this.state.sortField === sortCol) {
+            this.setState({ ...this.state, sortDirection: !this.state.sortDirection }, () => {
+                this.props.sorting(this.props.pageType, this.state.sortField, this.state.sortDirection);
+            });
+        } else {
+            this.setState({ sortField: sortCol, sortDirection: false }, () => {
+                this.props.sorting(this.props.pageType, this.state.sortField, this.state.sortDirection);
+            });
+        }
+    }
+
+    spellButton(spell) {
+        switch(this.props.buttonName) {
+            case 'Prepare':
+                this.props.buttonClick(spell, this.state.sortField, this.state.sortDirection);
+                break;
+            default:
+                this.props.buttonClick(spell);
+                break;
+        }
+    }
 
     render() {
         return (
             <div className='spellbookPage'>
-                <SpellFilter spells={this.state.spells} pureSpells={this.props.pureSpells} filterFunc={this.filterSpells} />
-                <Header sorting={this.sortSpells} />
+                <SpellFilter spells={this.props.spells} pureSpells={this.props.pureSpells} filterFunc={this.filterSpells} />
+                <Header sorting={this.sortPageSpells.bind(this)} sortField={this.state.sortField} reverse={this.state.sortDirection} />
                 {
-                    (this.state.spells.length > 0) ? 
-                        this.state.spells.map((spell) => (
-                            <Spell key={spell.spell_id} spell={spell} />
+                    (this.props.spells.length > 0) ? 
+                        this.props.spells.map((spell) => (
+                            <Spell key={spell.spell_id} spell={spell} knownSpell={true} buttonName={this.props.buttonName} buttonClick={this.spellButton.bind(this)} />
                         )) 
                     : <h2 id='noSpells'>Arcana Check Failed, No Spells Found!</h2>
                 }
