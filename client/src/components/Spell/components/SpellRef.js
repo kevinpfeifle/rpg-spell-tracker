@@ -34,7 +34,9 @@ const SpellRef = ({spell, toggleVisibility, buttonName, buttonClick}) => {
        buttonClick(spell);
     }
     const checkButtonDisplay = () => {
+        // Cantrips, class/racial spells, and prepared spells should not prompt any sort of button. Otherwise, we create the button.
         if (spell.spell_level === 0) return false;
+        else if (spell.circle_spell || spell.domain_spell || spell.oath_spell || spell.racial_spell || spell.specialist_spell) return false
         else if (buttonName === 'Prepare') return !spell.spell_prepared;
         else return true; 
     }
