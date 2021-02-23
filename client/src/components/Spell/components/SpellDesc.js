@@ -6,10 +6,22 @@ import {mapSpellLevel} from '../../../utils/spellTransforms';
  * @returns the created component.
  */
 const SpellDesc = ({spell}) => {
+
+    const formatSpellLevel = () => {
+        let spellLevel = mapSpellLevel(spell.spell_level).toLowerCase();
+        if (spell.spell_level > 0) {
+            spellLevel = spellLevel.split(' ');
+            spellLevel = spellLevel[0] + '-' + spellLevel[1];
+        }
+        if (spell.spell_level === 0) return (spell.spell_school + ' ' + spellLevel);
+        else if (spell.ritual) return (spellLevel + ' ' + spell.spell_school.toLowerCase() + ' (ritual)');
+        else return (spellLevel + ' ' + spell.spell_school.toLowerCase());
+    }
+
     return (
         <div className='spellDesc'>
             <h2>{spell.spell_name}</h2>
-            <p><em>{mapSpellLevel(spell.spell_level).toLowerCase()} {spell.spell_school.toLowerCase()} {spell.ritual && '(ritual)'}</em></p>
+            <p><em>{formatSpellLevel()}</em></p>
             <p><strong>Casting Time:</strong> {spell.casting_time}</p>
             <p><strong>Range:</strong> {spell.spell_range}</p>
             <p>
@@ -20,7 +32,7 @@ const SpellDesc = ({spell}) => {
             <p><strong>Classes:</strong> {spell.classes.toString()}</p>
             <p>{spell.description}</p> {/* Description (This could be broken up into some simpler, like a quick reference of spell type and dice to roll?) */}
             {
-                spell.hasOwnProperty('description_higher_levels') && (<p><strong>At Higher Levels:</strong> {spell.description_higher_levels}</p>)
+                (spell.description_higher_levels) && (<p><strong>At Higher Levels:</strong> {spell.description_higher_levels}</p>)
             }
         </div>
     );
