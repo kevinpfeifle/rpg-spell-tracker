@@ -4,29 +4,25 @@ const db = require('../../../database/db');
 const queries = require('./queries');
 
 /**
- * Queries the DB to fetch a spell by the provided spell id.
+ * Queries the DB to fetch a spellbook by the provided spellbook id.
  * @param {Number} spellId 
  * @returns the requested spell.
  */
-function fetchSpellById(spellId) {
+function fetchSpellbookById(spellId) {
     return new Promise((resolve, reject) => {
-        let query = queries.fetchSpellById;
+        let query = queries.fetchSpellbookById;
         db.executeQuery(query, [spellId]).then((results) => {
-            resolve(results[0]);
+            resolve(results);
         }).catch((err) => {
             reject(err);
         });
     });
 }
 
-/**
- * Queries the DB to fetch all spells under the "spell.spells" table.
- * @returns all fetched spells.
- */
-function fetchAllSpells() {
+function updateSpellbookSpell(input) {
     return new Promise((resolve, reject) => {
-        let query = queries.fetchAllSpells;
-        db.executeQuery(query).then((results) => {
+        let query = queries.updateSpellbookSpell;
+        db.executeQuery(query, [input.spellPrepared, input.sender, new Date(), input.spellbookId, input.spellId]).then((results) => {
             resolve(results);
         }).catch((err) => {
             reject(err);
@@ -35,6 +31,6 @@ function fetchAllSpells() {
 }
 
 module.exports = {
-    fetchSpellById: fetchSpellById, 
-    fetchAllSpells: fetchAllSpells
+    fetchSpellbookById: fetchSpellbookById,
+    updateSpellbookSpell: updateSpellbookSpell
 };
