@@ -9,10 +9,6 @@ import Footer from './components/Footer';
 import Spellbook from './components/Spellbook/Spellbook';
 
 class App extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     return (
       <Router>

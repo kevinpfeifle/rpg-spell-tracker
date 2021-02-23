@@ -10,10 +10,6 @@ import { RiArrowDropDownLine, RiArrowDropUpLine } from "react-icons/ri";
  * @returns the created component.
  */
 class Header extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-
     sortSpells = (sortCol) => {
         this.props.sorting(sortCol);
     }
