@@ -48,4 +48,22 @@ router.get('/', (req, res) => {
     }
 });
 
+// Route to create a new spell.
+router.post('/', (req, res) => {
+    if (req.body != null && req.body !== {}) {
+        let input = {...req.body, ...req.headers};
+        spell.insertSpell(input).then((results) => {
+            res.status(200).json({
+                'status': 'success'
+            });
+        }).catch((err) => {
+            res.status(200).json({
+                'error': err
+            });
+        });
+    } else res.status(200).json({
+        'error': 'missing required parameters'
+    });
+});
+
 module.exports = router;
