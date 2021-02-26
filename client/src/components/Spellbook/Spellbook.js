@@ -1,6 +1,5 @@
 // React imports.
 import React from 'react'
-import { Link } from 'react-router-dom';
 
 // Internal component imports.
 import SpellbookPage from './components/SpellbookPage';
@@ -323,7 +322,6 @@ class Spellbook extends React.Component {
                     <SpellbookTab changeTab={this.changePage.bind(this)} extraSpellTabs={this.state.extraSpellTabs} />
                     {spellBookContents}
                 </div>
-                <Link to="/">Go back</Link>
             </div>
         )
     }

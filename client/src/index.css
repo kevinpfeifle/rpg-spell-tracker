@@ -13,6 +13,78 @@ code {
     monospace;
 }
 
+.navbar {
+  display: inline;
+  /* width: 100%; */
+  text-align: center;
+}
+
+.navbar ul {
+  padding: 0;
+  margin: 0;
+  /* justify-content: center; */
+  display: flex;
+  width: 100%;
+  list-style: none;
+  background-color: #2d202e;
+}
+
+.navbar ul a{
+  text-decoration: none;
+  color: #ffffff;
+  display: block;
+  padding-left: 15px;
+  padding-right: 15px;
+  /* margin: 0; */
+  /* width: 100%;
+  height: 100%; */
+  /* display: grid; */
+  margin: auto;
+  height: auto;
+  /* text-align: center; */
+  width: 100%;
+  /* justify-content: center; */
+  
+}
+
+.navbar li {
+  /* width: auto; */
+  /* justify-content: center; */
+  /* text-align: center; */
+  display: flex;
+}
+
+.navbar li:hover{
+  background-color: #423643;
+}
+
+.navbar li:active, .navbarButton li:focus {
+  outline: 0;
+  border: none;
+}
+
+
+.navbarButton {
+  background-color: #2d202e;
+  border: none;
+  color: white;
+  padding-left: 15px;
+  padding-right: 15px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
+
+.navbarButton:hover {
+  background-color: #423643;
+}
+
+.navbarButton:active, .navbarButton:focus {
+  outline: 0;
+  border: none;
+}
+
 .spellbook {
   display: grid;
   margin: auto;
@@ -359,6 +431,14 @@ code {
   animation: spin 2s linear infinite;
   margin: auto;
   justify-content: center;
+}
+
+.about {
+  margin-left: 25px;
+}
+
+.about h1, .about h2, .about h3, .about h4, .about p, .about li {
+  color: #ffffff;
 }
 
 @keyframes spin {
