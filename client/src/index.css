@@ -19,15 +19,25 @@ code {
   text-align: center;
 }
 
+.navbar ul .navbarLeft {
+  display: flex;
+  text-align: center;
+}
+
+.navbar ul .navbarRight {
+  display: flex;
+  text-align: center;
+}
+
 .navbar ul {
   padding: 0;
   margin: 0;
   display: flex;
+  justify-content: space-between;
   width: 100%;
   list-style: none;
   background-color: #2d202e;
 }
-
 .navbar ul a{
   text-decoration: none;
   color: #ffffff;
@@ -40,7 +50,6 @@ code {
   display: flex;
   align-items: center;
   justify-content: center;
-  
 }
 
 .navbar li {
@@ -51,28 +60,7 @@ code {
   background-color: #423643;
 }
 
-.navbar li:active, .navbarButton li:focus {
-  outline: 0;
-  border: none;
-}
-
-.navbarButton {
-  background-color: #2d202e;
-  border: none;
-  color: white;
-  padding-left: 15px;
-  padding-right: 15px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-}
-
-.navbarButton:hover {
-  background-color: #423643;
-}
-
-.navbarButton:active, .navbarButton:focus {
+.navbar li:active {
   outline: 0;
   border: none;
 }
