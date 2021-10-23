@@ -11,7 +11,7 @@ const queries = require('./queries');
 function fetchSpellbookById(spellId) {
     return new Promise((resolve, reject) => {
         let query = queries.fetchSpellbookById;
-        db.executeQuery(query, [spellId]).then((results) => {
+        db.executeQuery('tool', query, [spellId]).then((results) => {
             resolve(results);
         }).catch((err) => {
             reject(err);
@@ -22,7 +22,7 @@ function fetchSpellbookById(spellId) {
 function updateSpellbookSpell(input) {
     return new Promise((resolve, reject) => {
         let query = queries.updateSpellbookSpell;
-        db.executeQuery(query, [input.spellPrepared, input.sender, new Date(), input.spellbookId, input.spellId]).then((results) => {
+        db.executeQuery('tool', query, [input.spellPrepared, input.sender, new Date(), input.spellbookId, input.spellId]).then((results) => {
             resolve(results);
         }).catch((err) => {
             reject(err);
