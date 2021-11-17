@@ -16,6 +16,16 @@ function init(dbCredentialsTool, dbCredentialsUsers) {
 }
 
 /**
+ * Returns the specified pool type.
+ * @param {String} poolType
+ * @returns desired pg coonection pool. 
+ */
+function getPool(poolType) {
+    if (poolType === 'users') return poolUsers;
+    else if (poolType === 'tool') return poolTool;
+}
+
+/**
  * Aquires a connection from the pool, and makes a query to the PostgreSQL server to fetch data for the client.
  * @param {String} dbType the type of DB we are connecting to
  * @param {String} query the query to be executed
@@ -45,5 +55,6 @@ function executeQuery(dbType, query, bindParams) {
 
 module.exports = {
     init: init,
+    getPool: getPool,
     executeQuery: executeQuery
 }

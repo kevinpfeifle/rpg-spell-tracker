@@ -6,6 +6,7 @@ const router = require('express').Router();
 const bcrypt = require('bcrypt');
 // Internal imports for our models.
 const user = require('./models/user');
+const { registerUser } = require('./models/queries');
 
 // Route to register a new user.
 router.put('/', (req, res) => {
@@ -23,6 +24,7 @@ router.put('/', (req, res) => {
                     input.password = hash; // Overwrite the given password with the hashed one before storing in DB.
                     user.registerUser(input).then((results) => {
                         console.log('Successfully registered user');
+                        if (!req.session.authenticated) req.session.authenticated = true;
                         res.status(200).json({
                             'status': 'success'
                         });
@@ -72,7 +74,7 @@ router.get('/checkEmail', (req, res) => {
             console.log(err);
             res.status(200).json({
                 'error': err
-            });
+            }); 
         });
     } else res.status(200).json({
         'error': 'missing required parameters'
