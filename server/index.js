@@ -44,7 +44,7 @@ app.use(session({
     saveUninitialized: false,
     name: 'RPGSESID',
     cookie: {
-        maxAge: 1000 * 60,
+        maxAge: 1000 * 60 * 60 * 24,
         httpOnly: false, // This flags makes it so the client can/can't see what it in the cookie. True means only server sees cookie.
         secure: false,
         sameSite: false,
