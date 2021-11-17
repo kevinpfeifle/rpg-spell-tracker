@@ -63,19 +63,18 @@ router.post('/', (req, res) => {
 });
 
 // Route to check if a user's cookie is already authenticated with the server.
-// router.get('/checkAuth', (req, res) => {
-//     // console.log(req);
-//     if (req.session && req.session.authenticated) {
-//         res.status(200).json({
-//             'status': 'success',
-//             'authenticated': true,
-//             'message': 'Access granted'
-//         });
-//     } else res.status(200).json({
-//         'status': 'success',
-//         'authenticated': false,
-//         'message': 'Access denied'
-//     });
-// });
+router.get('/checkIfAuthorized', (req, res) => {
+    if (req.session && req.session.authenticated) {
+        res.status(200).json({
+            'status': 'success',
+            'authenticated': true,
+            'message': 'Access granted'
+        });
+    } else res.status(200).json({
+        'status': 'success',
+        'authenticated': false,
+        'message': 'Access denied'
+    });
+});
 
 module.exports = router;
