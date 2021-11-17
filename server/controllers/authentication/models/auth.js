@@ -4,17 +4,32 @@ const db = require('../../../database/db');
 const queries = require('./queries');
 
 /**
+ * Queries the DB to fetch the password hash to compare for logins.
+ * @param {Object} input the username and password for the user. 
+ */
+function fetchUserLoginDetails(input) {
+    return new Promise((resolve, reject) => {
+        let query = input.usernameOrEmail.includes('@') ?
+            queries.fetchEmailLoginDetail :
+            queries.fetchUserLoginDetails;
+        db.executeQuery('users', query, [input.usernameOrEmail]).then((results) => {
+            resolve(results[0]);
+        }).catch((err) => {
+            reject(err);
+        });
+    });
+}
+
+/**
  * 
  * @param {Object} input the username, email, and password for the user. 
  */
 function registerUser(input) {
     return new Promise((resolve, reject) => {
         let query = queries.registerUser;
-        console.log(input)
         db.executeQuery('users', query, [input.username, input.email, input.password, new Date(), input.sender]).then((results) => {
             resolve(results[0]);
         }).catch((err) => {
-            console.log(err);
             reject(err);
         });
     });
@@ -53,6 +68,7 @@ function checkEmail(email) {
 }
 
 module.exports = {
+    fetchUserLoginDetails: fetchUserLoginDetails,
     registerUser: registerUser,
     checkUsername: checkUsername,
     checkEmail: checkEmail

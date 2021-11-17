@@ -5,7 +5,7 @@ const router = require('express').Router();
 // External import for cryptograhpic functions.
 const bcrypt = require('bcrypt');
 // Internal imports for our models.
-const user = require('./models/user');
+const auth = require('./models/auth');
 const { registerUser } = require('./models/queries');
 
 // Route to register a new user.
@@ -22,9 +22,12 @@ router.put('/', (req, res) => {
             bcrypt.genSalt(10, (err, salt) => {
                 bcrypt.hash(input.password, salt, (err, hash) => {
                     input.password = hash; // Overwrite the given password with the hashed one before storing in DB.
-                    user.registerUser(input).then((results) => {
+                    auth.registerUser(input).then((results) => {
                         console.log('Successfully registered user');
-                        if (!req.session.authenticated) req.session.authenticated = true;
+                        if (!req.session.authenticated) {
+                            req.session.authenticated = true;
+                            req.session.userId  = results.user_id;
+                        }
                         res.status(200).json({
                             'status': 'success'
                         });
@@ -45,7 +48,7 @@ router.put('/', (req, res) => {
 router.get('/checkUsername', (req, res) => {
     if (req.query.username != null && req.query.username !== '') {
         let username = req.query.username;
-        user.checkUsername(username).then((results) => {
+        auth.checkUsername(username).then((results) => {
             res.status(200).json({
                 'status': 'success',
                 'exists': results.exists
@@ -65,7 +68,7 @@ router.get('/checkUsername', (req, res) => {
 router.get('/checkEmail', (req, res) => {
     if (req.query.email != null && req.query.email !== '') {
         let email = req.query.email;
-        user.checkEmail(email).then((results) => {
+        auth.checkEmail(email).then((results) => {
             res.status(200).json({
                 'status': 'success',
                 'exists': results.exists
