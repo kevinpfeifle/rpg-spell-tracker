@@ -1,8 +1,8 @@
 import React from 'react'
 
-import { Link } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
 
-import { loginUser } from '../../../apis/authAPI';
+import { checkIfAuthorized, loginUser } from '../../../apis/authAPI';
 
 // React Icons imports
 import { AiFillExclamationCircle, AiFillCheckCircle } from "react-icons/ai";
@@ -14,10 +14,20 @@ class Login extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            userAuthenticated: undefined,
             usernameOrEmail: '',
             password: '',
             validationErrors: []
         }
+    }
+
+    async componentDidMount() {
+        await checkIfAuthorized().then((authorized) => {
+            this.setState({
+                ...this.state,
+                userAuthenticated: authorized
+            });
+        });
     }
 
     async handleChange(event) {
@@ -57,30 +67,36 @@ class Login extends React.Component {
     }
 
     render() {
-        return (
-            <div className='authPage'>
-                <img className='RPGToolIcon' src={LoadingIcon} alt='RPGToolICon' style={{width:'5em',height:'5em'}}/>
-                <div className='authForm'>
-                    <h2>Hail, Adventurer!</h2>
-                    <form onSubmit={this.handleSubmit.bind(this)}>
-                        <span>Username or Email</span>
-                        <input type='text' name='usernameOrEmail' value={this.state.usernameOrEmail} onChange={this.handleChange.bind(this)} />
-                        <hr/>
-                        <span>Password</span>
-                        <input type='password' name='password' value={this.state.password} onChange={this.handleChange.bind(this)} />
-                        <hr/>
-                        {
-                            this.state.validationErrors.map(message => (            
-                                <p key={message} className='registrationAlert'><AiFillExclamationCircle /> {message} </p>
-                            ))
-                        }
-                        <button type='submit'>Login to Service</button>
-                    </form>
-                    <span>New around here? <Link to='/register' >Sign Up</Link></span>
-                    <span>Having login issues? <Link to='/' >Forgot Password</Link></span>
+        if (this.state.userAuthenticated == undefined) {
+            return null;
+        } else if (this.state.userAuthenticated) {
+            return <Redirect to='/' />
+        } else {
+            return (
+                <div className='authPage'>
+                    <img className='RPGToolIcon' src={LoadingIcon} alt='RPGToolICon' style={{width:'5em',height:'5em'}}/>
+                    <div className='authForm'>
+                        <h2>Hail, Adventurer!</h2>
+                        <form onSubmit={this.handleSubmit.bind(this)}>
+                            <span>Username or Email</span>
+                            <input type='text' name='usernameOrEmail' value={this.state.usernameOrEmail} onChange={this.handleChange.bind(this)} />
+                            <hr/>
+                            <span>Password</span>
+                            <input type='password' name='password' value={this.state.password} onChange={this.handleChange.bind(this)} />
+                            <hr/>
+                            {
+                                this.state.validationErrors.map(message => (            
+                                    <p key={message} className='registrationAlert'><AiFillExclamationCircle /> {message} </p>
+                                ))
+                            }
+                            <button type='submit'>Login to Service</button>
+                        </form>
+                        <span>New around here? <Link to='/register' >Sign Up</Link></span>
+                        <span>Having login issues? <Link to='/' >Forgot Password</Link></span>
+                    </div>
                 </div>
-            </div>
-        )    
+            )    
+        }
     }
 }
 

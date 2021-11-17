@@ -1,8 +1,8 @@
 import React from 'react'
 
-import { Link } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
 
-import { registerUser, checkUsername, checkEmail } from '../../../apis/authAPI';
+import { checkEmail, checkIfAuthorized, checkUsername, registerUser } from '../../../apis/authAPI';
 
 // React Icons imports
 import { AiFillExclamationCircle, AiFillCheckCircle } from "react-icons/ai";
@@ -15,6 +15,7 @@ class Register extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            userAuthenticated: undefined,
             username: {
                 value: '',
                 valid: false,
@@ -46,6 +47,15 @@ class Register extends React.Component {
                 messageVisible: false
             }
         }
+    }
+
+    async componentDidMount() {
+        await checkIfAuthorized().then((authorized) => {
+            this.setState({
+                ...this.state,
+                userAuthenticated: authorized
+            });
+        });
     }
 
     async handleChange(event) {
@@ -221,160 +231,166 @@ class Register extends React.Component {
     }
 
     render() {
-        return (
-            <div className="authPage">
-                <img className='RPGToolIcon' src={LoadingIcon} alt='RPGToolICon' style={{width:'5em',height:'5em'}}/>
-                <div className='authForm'>
-                    <h2>Embark On Your Journey!</h2>
-                    <form onSubmit={this.handleSubmit.bind(this)}>
-                        {/* Logic for the Username header/input and validations warnings */}
-                        <span id='username'  onMouseOver={this.handleHoverOver.bind(this)} onMouseOut={this.handleHoverOut.bind(this)}>Username</span> 
-                        {
-                            (this.state.username.valid != null && !this.state.username.valid && this.state.username.messages.length > 0) && 
-                            <span>
-                                <AiFillExclamationCircle  className='registrationAlertIcon' id='username'  onMouseOver={this.handleHoverOver.bind(this)} onMouseOut={this.handleHoverOut.bind(this)}/>
-                                {
-                                    (this.state.username.messageVisible) &&
-                                    <div className='registrationAlertBox'>
-                                        {
-                                            this.state.username.messages.map(message => (            
-                                                <p className='registrationAlert' key={message}><AiFillExclamationCircle /> {message} </p>
-                                            ))
-                                        }
-                                    </div>
-                                }
+        if (this.state.userAuthenticated == undefined) {
+            return null;
+        } else if (this.state.userAuthenticated) {
+            return <Redirect to='/' />
+        } else {
+            return (
+                <div className="authPage">
+                    <img className='RPGToolIcon' src={LoadingIcon} alt='RPGToolICon' style={{width:'5em',height:'5em'}}/>
+                    <div className='authForm'>
+                        <h2>Embark On Your Journey!</h2>
+                        <form onSubmit={this.handleSubmit.bind(this)}>
+                            {/* Logic for the Username header/input and validations warnings */}
+                            <span id='username'  onMouseOver={this.handleHoverOver.bind(this)} onMouseOut={this.handleHoverOut.bind(this)}>Username</span> 
+                            {
+                                (this.state.username.valid != null && !this.state.username.valid && this.state.username.messages.length > 0) && 
+                                <span>
+                                    <AiFillExclamationCircle  className='registrationAlertIcon' id='username'  onMouseOver={this.handleHoverOver.bind(this)} onMouseOut={this.handleHoverOut.bind(this)}/>
+                                    {
+                                        (this.state.username.messageVisible) &&
+                                        <div className='registrationAlertBox'>
+                                            {
+                                                this.state.username.messages.map(message => (            
+                                                    <p className='registrationAlert' key={message}><AiFillExclamationCircle /> {message} </p>
+                                                ))
+                                            }
+                                        </div>
+                                    }
 
-                            </span>
-                        }
-                        {
-                            (this.state.username.valid) && 
-                            <span>
-                                <AiFillCheckCircle className='registrationValidIcon' id='username'  onMouseOver={this.handleHoverOver.bind(this)} onMouseOut={this.handleHoverOut.bind(this)}/>
-                                {
-                                    (this.state.username.messageVisible) &&   
-                                    <div className='registrationAlertBox'>
-                                        {
-                                            this.state.username.messages.map(message => (            
-                                                <p className='registrationValid' key={message}><AiFillCheckCircle /> {message} </p>
-                                            ))
-                                        }
-                                    </div>                                         
-                                }
-                            </span>
-                        }
-                        <input type='text' name='username' value={this.state.username.value} onChange={this.handleChange.bind(this)} onBlur={this.handleBlur.bind(this)} />
-                        <hr/>
-                        {/* Logic for the Email header/input and validations warnings */}
-                        <span id='email'  onMouseOver={this.handleHoverOver.bind(this)} onMouseOut={this.handleHoverOut.bind(this)}>Email</span> 
-                        {
-                            (this.state.email.valid != null && !this.state.email.valid && this.state.email.messages.length > 0) && 
-                            <span>
-                                <AiFillExclamationCircle  className='registrationAlertIcon' id='email'  onMouseOver={this.handleHoverOver.bind(this)} onMouseOut={this.handleHoverOut.bind(this)}/>
-                                {
-                                    (this.state.email.messageVisible) &&
-                                    <div className='registrationAlertBox'>
-                                        {
-                                            this.state.email.messages.map(message => (            
-                                                <p className='registrationAlert' key={message}><AiFillExclamationCircle /> {message} </p>
-                                            ))
-                                        }
-                                    </div>
-                                }
+                                </span>
+                            }
+                            {
+                                (this.state.username.valid) && 
+                                <span>
+                                    <AiFillCheckCircle className='registrationValidIcon' id='username'  onMouseOver={this.handleHoverOver.bind(this)} onMouseOut={this.handleHoverOut.bind(this)}/>
+                                    {
+                                        (this.state.username.messageVisible) &&   
+                                        <div className='registrationAlertBox'>
+                                            {
+                                                this.state.username.messages.map(message => (            
+                                                    <p className='registrationValid' key={message}><AiFillCheckCircle /> {message} </p>
+                                                ))
+                                            }
+                                        </div>                                         
+                                    }
+                                </span>
+                            }
+                            <input type='text' name='username' value={this.state.username.value} onChange={this.handleChange.bind(this)} onBlur={this.handleBlur.bind(this)} />
+                            <hr/>
+                            {/* Logic for the Email header/input and validations warnings */}
+                            <span id='email'  onMouseOver={this.handleHoverOver.bind(this)} onMouseOut={this.handleHoverOut.bind(this)}>Email</span> 
+                            {
+                                (this.state.email.valid != null && !this.state.email.valid && this.state.email.messages.length > 0) && 
+                                <span>
+                                    <AiFillExclamationCircle  className='registrationAlertIcon' id='email'  onMouseOver={this.handleHoverOver.bind(this)} onMouseOut={this.handleHoverOut.bind(this)}/>
+                                    {
+                                        (this.state.email.messageVisible) &&
+                                        <div className='registrationAlertBox'>
+                                            {
+                                                this.state.email.messages.map(message => (            
+                                                    <p className='registrationAlert' key={message}><AiFillExclamationCircle /> {message} </p>
+                                                ))
+                                            }
+                                        </div>
+                                    }
 
-                            </span>
-                        }
-                        {
-                            (this.state.email.valid) && 
-                            <span>
-                                <AiFillCheckCircle className='registrationValidIcon' id='email'  onMouseOver={this.handleHoverOver.bind(this)} onMouseOut={this.handleHoverOut.bind(this)}/>
-                                {
-                                    (this.state.email.messageVisible) &&   
-                                    <div className='registrationAlertBox'>
-                                        {
-                                            this.state.email.messages.map(message => (            
-                                                <p className='registrationValid' key={message}><AiFillCheckCircle /> {message} </p>
-                                            ))
-                                        }
-                                    </div>                                         
-                                }
-                            </span>
-                        }
-                        <input type='text' name='email' value={this.state.email.value} onChange={this.handleChange.bind(this)} onBlur={this.handleBlur.bind(this)} />
-                        <hr/>
-                        {/* Logic for the Confirm Email header/input and validations warnings */}
-                        <span id='confirmEmail'  onMouseOver={this.handleHoverOver.bind(this)} onMouseOut={this.handleHoverOut.bind(this)}>Confirm Email</span> 
-                        {
-                            (this.state.confirmEmail.valid != null && !this.state.confirmEmail.valid && this.state.confirmEmail.messages.length > 0) && 
-                            <span>
-                                <AiFillExclamationCircle  className='registrationAlertIcon' id='confirmEmail'  onMouseOver={this.handleHoverOver.bind(this)} onMouseOut={this.handleHoverOut.bind(this)}/>
-                                {
-                                    (this.state.confirmEmail.messageVisible) &&
-                                    <div className='registrationAlertBox'>
-                                        {
-                                            this.state.confirmEmail.messages.map(message => (            
-                                                <p className='registrationAlert' key={message}><AiFillExclamationCircle /> {message} </p>
-                                            ))
-                                        }
-                                    </div>
-                                }
+                                </span>
+                            }
+                            {
+                                (this.state.email.valid) && 
+                                <span>
+                                    <AiFillCheckCircle className='registrationValidIcon' id='email'  onMouseOver={this.handleHoverOver.bind(this)} onMouseOut={this.handleHoverOut.bind(this)}/>
+                                    {
+                                        (this.state.email.messageVisible) &&   
+                                        <div className='registrationAlertBox'>
+                                            {
+                                                this.state.email.messages.map(message => (            
+                                                    <p className='registrationValid' key={message}><AiFillCheckCircle /> {message} </p>
+                                                ))
+                                            }
+                                        </div>                                         
+                                    }
+                                </span>
+                            }
+                            <input type='text' name='email' value={this.state.email.value} onChange={this.handleChange.bind(this)} onBlur={this.handleBlur.bind(this)} />
+                            <hr/>
+                            {/* Logic for the Confirm Email header/input and validations warnings */}
+                            <span id='confirmEmail'  onMouseOver={this.handleHoverOver.bind(this)} onMouseOut={this.handleHoverOut.bind(this)}>Confirm Email</span> 
+                            {
+                                (this.state.confirmEmail.valid != null && !this.state.confirmEmail.valid && this.state.confirmEmail.messages.length > 0) && 
+                                <span>
+                                    <AiFillExclamationCircle  className='registrationAlertIcon' id='confirmEmail'  onMouseOver={this.handleHoverOver.bind(this)} onMouseOut={this.handleHoverOut.bind(this)}/>
+                                    {
+                                        (this.state.confirmEmail.messageVisible) &&
+                                        <div className='registrationAlertBox'>
+                                            {
+                                                this.state.confirmEmail.messages.map(message => (            
+                                                    <p className='registrationAlert' key={message}><AiFillExclamationCircle /> {message} </p>
+                                                ))
+                                            }
+                                        </div>
+                                    }
 
-                            </span>
-                        }
-                        <input type='text' name='confirmEmail' value={this.state.confirmEmail.value} onChange={this.handleChange.bind(this)} onBlur={this.handleBlur.bind(this)} />
-                        <hr/>
-                        {/* Logic for the Password header/input and validations warnings */}
-                        <span id='password'  onMouseOver={this.handleHoverOver.bind(this)} onMouseOut={this.handleHoverOut.bind(this)}>Password</span> 
-                        {
-                            (this.state.password.valid != null && !this.state.password.valid && this.state.password.messages.length > 0) && 
-                            <span>
-                                <AiFillExclamationCircle  className='registrationAlertIcon' id='password'  onMouseOver={this.handleHoverOver.bind(this)} onMouseOut={this.handleHoverOut.bind(this)}/>
-                                {
-                                    (this.state.password.messageVisible) &&
-                                    <div className='registrationAlertBox'>
-                                        {
-                                            this.state.password.messages.map(message => (            
-                                                <p className='registrationAlert' key={message}><AiFillExclamationCircle /> {message} </p>
-                                            ))
-                                        }
-                                    </div>
-                                }
+                                </span>
+                            }
+                            <input type='text' name='confirmEmail' value={this.state.confirmEmail.value} onChange={this.handleChange.bind(this)} onBlur={this.handleBlur.bind(this)} />
+                            <hr/>
+                            {/* Logic for the Password header/input and validations warnings */}
+                            <span id='password'  onMouseOver={this.handleHoverOver.bind(this)} onMouseOut={this.handleHoverOut.bind(this)}>Password</span> 
+                            {
+                                (this.state.password.valid != null && !this.state.password.valid && this.state.password.messages.length > 0) && 
+                                <span>
+                                    <AiFillExclamationCircle  className='registrationAlertIcon' id='password'  onMouseOver={this.handleHoverOver.bind(this)} onMouseOut={this.handleHoverOut.bind(this)}/>
+                                    {
+                                        (this.state.password.messageVisible) &&
+                                        <div className='registrationAlertBox'>
+                                            {
+                                                this.state.password.messages.map(message => (            
+                                                    <p className='registrationAlert' key={message}><AiFillExclamationCircle /> {message} </p>
+                                                ))
+                                            }
+                                        </div>
+                                    }
 
-                            </span>
-                        }
-                        <input type='password' name='password' value={this.state.password.value} onChange={this.handleChange.bind(this)} onBlur={this.handleBlur.bind(this)} />
-                        <hr/>
-                        {/* Logic for the Confirm Password header/input and validations warnings */}
-                        <span id='confirmPassword'  onMouseOver={this.handleHoverOver.bind(this)} onMouseOut={this.handleHoverOut.bind(this)}>Confirm Password</span> 
-                        {
-                            (this.state.confirmPassword.valid != null && !this.state.confirmPassword.valid && this.state.confirmPassword.messages.length > 0) && 
-                            <span>
-                                <AiFillExclamationCircle  className='registrationAlertIcon' id='confirmPassword'  onMouseOver={this.handleHoverOver.bind(this)} onMouseOut={this.handleHoverOut.bind(this)}/>
-                                {
-                                    (this.state.confirmPassword.messageVisible) &&
-                                    <div className='registrationAlertBox'>
-                                        {
-                                            this.state.confirmPassword.messages.map(message => (            
-                                                <p className='registrationAlert' key={message}><AiFillExclamationCircle /> {message} </p>
-                                            ))
-                                        }
-                                    </div>
-                                }
+                                </span>
+                            }
+                            <input type='password' name='password' value={this.state.password.value} onChange={this.handleChange.bind(this)} onBlur={this.handleBlur.bind(this)} />
+                            <hr/>
+                            {/* Logic for the Confirm Password header/input and validations warnings */}
+                            <span id='confirmPassword'  onMouseOver={this.handleHoverOver.bind(this)} onMouseOut={this.handleHoverOut.bind(this)}>Confirm Password</span> 
+                            {
+                                (this.state.confirmPassword.valid != null && !this.state.confirmPassword.valid && this.state.confirmPassword.messages.length > 0) && 
+                                <span>
+                                    <AiFillExclamationCircle  className='registrationAlertIcon' id='confirmPassword'  onMouseOver={this.handleHoverOver.bind(this)} onMouseOut={this.handleHoverOut.bind(this)}/>
+                                    {
+                                        (this.state.confirmPassword.messageVisible) &&
+                                        <div className='registrationAlertBox'>
+                                            {
+                                                this.state.confirmPassword.messages.map(message => (            
+                                                    <p className='registrationAlert' key={message}><AiFillExclamationCircle /> {message} </p>
+                                                ))
+                                            }
+                                        </div>
+                                    }
 
-                            </span>
-                        }
-                        <input type='password' name='confirmPassword' value={this.state.confirmPassword.value} onChange={this.handleChange.bind(this)} onBlur={this.handleBlur.bind(this)} />
-                        <hr/>
-                        {
-                            (this.state.validationErrors) && 
-                            <p className='registrationAlert'><AiFillExclamationCircle /> {this.state.validationErrorMessage} </p>
-                        }
-                        <button type='submit'>Register for Service</button>
-                    </form>
-                    <span>Existing user? <Link to='/login'>Sign In</Link></span>
-                    <span>Having login issues? <Link to='/' >Forgot Password</Link></span>
-                </div>  
-            </div>
-        )     
+                                </span>
+                            }
+                            <input type='password' name='confirmPassword' value={this.state.confirmPassword.value} onChange={this.handleChange.bind(this)} onBlur={this.handleBlur.bind(this)} />
+                            <hr/>
+                            {
+                                (this.state.validationErrors) && 
+                                <p className='registrationAlert'><AiFillExclamationCircle /> {this.state.validationErrorMessage} </p>
+                            }
+                            <button type='submit'>Register for Service</button>
+                        </form>
+                        <span>Existing user? <Link to='/login'>Sign In</Link></span>
+                        <span>Having login issues? <Link to='/' >Forgot Password</Link></span>
+                    </div>  
+                </div>
+            )
+        }     
     }
 }
 
