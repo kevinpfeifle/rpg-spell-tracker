@@ -4,6 +4,7 @@ import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import { withRouter } from "react-router";
 
 // Component imports
+import Home from './components/Home';
 import UnderConstruction from './components/UnderConstruction';
 import About from './components/About';
 // import Footer from './components/Footer';
@@ -21,7 +22,7 @@ class App extends React.Component {
                 <div className='rpgTool'>
                     {/* <Navbar /> */}
                     <Switch>
-                        <Route exact path='/' component={UnderConstruction} />
+                        <Route exact path='/' component={Home} />
                         <Route path='/sample-spellbook' component={Spellbook} />
                         <Route path='/spell-compendium' component={UnderConstruction} />
                         <Route path='/about' component={About} />

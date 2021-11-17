@@ -201,7 +201,7 @@ class Register extends React.Component {
                 validationErrors: false
             }, async () => {
                 await registerUser(this.state.username.value, this.state.email.value, this.state.password.value).then((results) => {   
-                    this.props.history.push('/login');
+                    this.props.history.push('/');
                 }).catch((err) => {
                     // Handle the error here...
                     this.setState({

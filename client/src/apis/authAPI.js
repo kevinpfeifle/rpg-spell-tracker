@@ -1,5 +1,31 @@
 import axios from 'axios';
 
+function loginUser(usernameOrEmail, password) {
+    return new Promise((resolve, reject) => {
+        /**
+         * @TODO Create configuration for this endpoint -- hardcoding it for now.
+         */
+        let config = {
+            headers: {
+                'sender': 'rpgtool',
+                'content-type': 'application/json'
+            },
+            withCredentials: true
+        };
+        let body = {
+            'usernameOrEmail': usernameOrEmail,
+            'password': password
+        };
+        axios.post('http://localhost:4000/authentication/login', body, config).then((res) => {
+            if (res.data.status === 'success') resolve(res.data.authenticated);
+            else reject(res);
+        }).catch((err) => {
+            console.log(err);
+            resolve(false);
+        });
+    });
+}
+
 function registerUser(username, email, password) {
     return new Promise((resolve, reject) => {
         /**
@@ -9,7 +35,8 @@ function registerUser(username, email, password) {
             headers: {
                 'sender': 'rpgtool',
                 'content-type': 'application/json'
-            }
+            },
+            withCredentials: true
         };
         let body = {
                 'username': username,
@@ -17,7 +44,7 @@ function registerUser(username, email, password) {
                 'password': password
         };
         axios.put('http://localhost:4000/authentication/register', body, config).then((res) => {
-            if (res.data.status === 'success') resolve(res);
+            if (res.data.status === 'success') resolve(res.data.authenticated);
             else reject(res);
         }).catch((err) => {
             reject(err);
@@ -35,7 +62,13 @@ function checkUsername(username) {
         /**
          * @TODO Create configuration for this endpoint -- hardcoding it for now.
          */
-        axios.get('http://localhost:4000/authentication/register/checkUsername?username=' + username).then((res) => {
+        let config = {
+            headers: {
+                'sender': 'rpgtool',
+                'content-type': 'application/json'
+            }
+        };
+        axios.get('http://localhost:4000/authentication/register/checkUsername?username=' + username, config).then((res) => {
             if (res.data.status === 'success') resolve(res.data.exists);
             else reject(res);
         }).catch((err) => {
@@ -54,7 +87,13 @@ function checkEmail(email) {
         /**
          * @TODO Create configuration for this endpoint -- hardcoding it for now.
          */
-        axios.get('http://localhost:4000/authentication/register/checkEmail?email=' + email).then((res) => {
+        let config = {
+            headers: {
+                'sender': 'rpgtool',
+                'content-type': 'application/json'
+            }
+        };
+        axios.get('http://localhost:4000/authentication/register/checkEmail?email=' + email, config).then((res) => {
             if (res.data.status === 'success') resolve(res.data.exists);
             else reject(res);
         }).catch((err) => {
@@ -64,6 +103,7 @@ function checkEmail(email) {
 }
 
 export {
+    loginUser,
     registerUser,
     checkUsername,
     checkEmail
