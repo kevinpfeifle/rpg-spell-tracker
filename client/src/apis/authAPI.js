@@ -48,6 +48,29 @@ function loginUser(usernameOrEmail, password) {
     });
 }
 
+function logoutUser() {
+    return new Promise((resolve, reject) => {
+        /**
+         * @TODO Create configuration for this endpoint -- hardcoding it for now.
+         */
+        let config = {
+            headers: {
+                'sender': 'rpgtool',
+                'content-type': 'application/json'
+            },
+            withCredentials: true
+        };
+        let body = {};
+        axios.post('http://localhost:4000/authentication/login/logout', body, config).then((res) => {
+            if (res.data.status === 'success') resolve(!res.data.authenticated);
+            else reject(res);
+        }).catch((err) => {
+            console.log(err);
+            resolve(false);
+        });
+    });
+}
+
 function registerUser(username, email, password) {
     return new Promise((resolve, reject) => {
         /**
@@ -127,6 +150,7 @@ function checkEmail(email) {
 export {
     checkIfAuthorized,
     loginUser,
+    logoutUser,
     registerUser,
     checkUsername,
     checkEmail

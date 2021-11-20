@@ -15,11 +15,23 @@ code {
 
 /* Styling for the Navbar at the top of each page. */
 .navbar {
-  display: inline;
-  text-align: center;
+  /* display: grid;
+  grid-template-areas:
+    'header'
+    'header'; */
+  /* display: inline-flex;
+  text-align: center; */
+  overflow: auto;
+  background-color: #2d202e;
+  display: flex;
+  align-items: center;
+  /* justify-content: center; */
+  height: auto;
+  width: 100%;
+  top: 0;
 }
 
-.navbar ul .navbarLeft {
+/* .navbar ul .navbarLeft {
   display: flex;
   text-align: center;
 }
@@ -36,10 +48,39 @@ code {
   justify-content: space-between;
   width: 100%;
   list-style: none;
-  background-color: #2d202e;
+  background-color: #2d202e; */
+/* } */
+
+.navLeft {
+    flex: 1 1 200px;
+    
 }
-.navbar ul a{
+
+.navRight {
+  display: flex;
+}
+
+
+/* .navLeft > * {
+  display: inline-block;
+  vertical-align: middle;
+  text-align: center;
+  line-height: normal;
+} */
+
+.navbar a {
+  
+  display: inline-block;
+  vertical-align: middle;
+  /* align-items: center; */
+  /* float: left; */
+  text-align: center;
+  /* padding-left: 15px;
+  padding-right: 15px; */
+  padding: 7px 8px;
   text-decoration: none;
+  height: 50px;
+  /* text-decoration: none;
   color: #ffffff;
   display: block;
   padding-left: 15px;
@@ -49,22 +90,106 @@ code {
   width: 100%;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: center; */
+  
 }
 
-.navbar li {
+
+.navbar a h4 {
+  color: white;
+  text-align: center;
+  vertical-align: middle;
+  margin: 0;
+  padding: 14px 8px;
+}
+
+.navbar div > h4 {
+  color: white;
+  background-color: #423643;
+  text-align: center;
+  vertical-align: middle;
+  margin: 0;
+  padding: 14px 8px;
+  border-style: solid;
+  border-radius: 1em;
+  border-color: #423643;
+  padding: 6px 8px !important;
+  margin-top: 5px !important;
+  margin-bottom: 5px !important;
+}
+
+.navbar div > h4:hover{
+  background-color: #59405C;
+  border-color: #59405C;
+}
+/* .navbar li {
   display: flex;
-}
+} */
 
-.navbar li:hover{
+.navbar a:hover{
   background-color: #423643;
 }
 
-.navbar li:active {
+.navbar a:active {
   outline: 0;
   border: none;
 }
 
+.navRegister {
+  border-style: solid;
+  border-radius: 1em;
+  padding: 6px 8px !important;
+  margin-top: 5px !important;
+  margin-bottom: 5px !important;
+  background-color: #423643;
+  border-color: #423643;
+  /* color: black !important; */
+}
+
+.navRegister:hover {
+  /* background-color: white; */
+}
+/* 
+.userTab {
+  position: relative;
+  display: inline-block;
+  float: right;
+  text-align: center;
+  justify-content: space-between;
+  margin-left: auto; 
+  margin-right: 0;
+} */
+
+/* .userTab ul {
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  list-style: none;
+  background-color: #2d202e;
+} */
+
+/* .userLinks {
+ margin-left: auto; 
+  margin-right: 0;
+  float:right;
+  position: absolute;
+} */
+
+/* .userTab li a {
+  text-decoration: none;
+  color: #ffffff;
+  display: block;
+  padding-left: 15px;
+  padding-right: 15px;
+  margin: 0;
+  height: auto;
+  width: 100%;
+  display: flex;
+  align-items: left;
+  justify-content: left;
+} */
 
 /* Styling for the Auth Pages and Forms */
 .authPage {
@@ -537,6 +662,13 @@ code {
 .Filter {
   display: flex;
   background-color: #4B5D67;
+}
+
+.LoadingBox {
+  display: flex;
+  margin: auto;
+  justify-content: center;
+  align-items: center;
 }
 
 .Loading {

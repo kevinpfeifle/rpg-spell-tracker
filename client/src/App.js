@@ -9,8 +9,9 @@ import UnderConstruction from './components/UnderConstruction';
 import About from './components/About';
 // import Footer from './components/Footer';
 import Navbar from './components/Navbar/Navbar';
-import Login from './components/Authentication/Login/Login';
-import Register from './components/Authentication/Register/Register';
+import Login from './components/Authentication/Login';
+import Logout from './components/Authentication/Logout';
+import Register from './components/Authentication/Register';
 import Spellbook from './components/Spellbook/Spellbook';
 // import SpellCompendium from './components/SpellCompendium/SpellCompendium';
 
@@ -28,6 +29,7 @@ class App extends React.Component {
                         <Route path='/about' component={About} />
                         <Route path='/login' component={Login} />
                         <Route path='/register' component={Register} />
+                        <Route path='/logout' component={Logout} />
                     </Switch>
                 </div>
             </BrowserRouter>

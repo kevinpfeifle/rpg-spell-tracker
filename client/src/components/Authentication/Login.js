@@ -2,13 +2,13 @@ import React from 'react'
 
 import { Link, Redirect } from 'react-router-dom'
 
-import { checkIfAuthorized, loginUser } from '../../../apis/authAPI';
+import { checkIfAuthorized, loginUser } from '../../apis/authAPI';
 
 // React Icons imports
 import { AiFillExclamationCircle, AiFillCheckCircle } from "react-icons/ai";
 
 // Asset imports.
-import LoadingIcon from '../../../vendor/d20.png';
+import LoadingIcon from '../../vendor/d20.png';
 
 class Login extends React.Component {
     constructor(props) {

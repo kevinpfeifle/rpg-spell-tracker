@@ -77,4 +77,21 @@ router.get('/checkIfAuthorized', (req, res) => {
     });
 });
 
+// Route to destroy the user's session with the server whenever the user logs out of the client.
+router.post('/logout', (req, res) => {
+    if (req.session && req.session.authenticated) {
+        req.session.destroy(function(err) {
+            res.status(200).json({
+                'status': 'success',
+                'authenticated': false,
+                'message': 'Logged Out'
+            });
+        });
+    } else res.status(200).json({
+        'status': 'failure',
+        'authenticated': false,
+        'message': 'User not authenticated with server'
+    });
+});
+
 module.exports = router;
