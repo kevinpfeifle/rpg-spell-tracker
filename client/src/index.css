@@ -1,0 +1,691 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #322F3D;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+/* Styling for the Navbar at the top of each page. */
+.navbar {
+  /* display: grid;
+  grid-template-areas:
+    'header'
+    'header'; */
+  /* display: inline-flex;
+  text-align: center; */
+  overflow: auto;
+  background-color: #2d202e;
+  display: flex;
+  align-items: center;
+  /* justify-content: center; */
+  height: auto;
+  width: 100%;
+  top: 0;
+}
+
+/* .navbar ul .navbarLeft {
+  display: flex;
+  text-align: center;
+}
+
+.navbar ul .navbarRight {
+  display: flex;
+  text-align: center;
+}
+
+.navbar ul {
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  list-style: none;
+  background-color: #2d202e; */
+/* } */
+
+.navLeft {
+    flex: 1 1 200px;
+    
+}
+
+.navRight {
+  display: flex;
+}
+
+
+/* .navLeft > * {
+  display: inline-block;
+  vertical-align: middle;
+  text-align: center;
+  line-height: normal;
+} */
+
+.navbar a {
+  
+  display: inline-block;
+  vertical-align: middle;
+  /* align-items: center; */
+  /* float: left; */
+  text-align: center;
+  /* padding-left: 15px;
+  padding-right: 15px; */
+  padding: 7px 8px;
+  text-decoration: none;
+  height: 50px;
+  /* text-decoration: none;
+  color: #ffffff;
+  display: block;
+  padding-left: 15px;
+  padding-right: 15px;
+  margin: 0;
+  height: auto;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center; */
+  
+}
+
+
+.navbar a h4 {
+  color: white;
+  text-align: center;
+  vertical-align: middle;
+  margin: 0;
+  padding: 14px 8px;
+}
+
+.navbar div > h4 {
+  color: white;
+  background-color: #423643;
+  text-align: center;
+  vertical-align: middle;
+  margin: 0;
+  padding: 14px 8px;
+  border-style: solid;
+  border-radius: 1em;
+  border-color: #423643;
+  padding: 6px 8px !important;
+  margin-top: 5px !important;
+  margin-bottom: 5px !important;
+}
+
+.navbar div > h4:hover{
+  background-color: #59405C;
+  border-color: #59405C;
+}
+/* .navbar li {
+  display: flex;
+} */
+
+.navbar a:hover{
+  background-color: #423643;
+}
+
+.navbar a:active {
+  outline: 0;
+  border: none;
+}
+
+.navRegister {
+  border-style: solid;
+  border-radius: 1em;
+  padding: 6px 8px !important;
+  margin-top: 5px !important;
+  margin-bottom: 5px !important;
+  background-color: #423643;
+  border-color: #423643;
+  /* color: black !important; */
+}
+
+.navRegister:hover {
+  /* background-color: white; */
+}
+/* 
+.userTab {
+  position: relative;
+  display: inline-block;
+  float: right;
+  text-align: center;
+  justify-content: space-between;
+  margin-left: auto; 
+  margin-right: 0;
+} */
+
+/* .userTab ul {
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  list-style: none;
+  background-color: #2d202e;
+} */
+
+/* .userLinks {
+ margin-left: auto; 
+  margin-right: 0;
+  float:right;
+  position: absolute;
+} */
+
+/* .userTab li a {
+  text-decoration: none;
+  color: #ffffff;
+  display: block;
+  padding-left: 15px;
+  padding-right: 15px;
+  margin: 0;
+  height: auto;
+  width: 100%;
+  display: flex;
+  align-items: left;
+  justify-content: left;
+} */
+
+/* Styling for the Auth Pages and Forms */
+.authPage {
+  background: url("./vendor/login1.jpg") no-repeat center center;
+  background-size: cover;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.authPage hr {
+  height: 1px;
+  background-color: #1c1a24;
+  border: none;
+}
+
+.authForm {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1em;
+  border-radius: 10px;
+  background: #322F3D;
+  outline: 1px solid #1c1a24;
+  box-shadow: 1px 2px #1c1a24;
+  width: 28em;
+  padding-bottom: 25px;
+  flex-direction: column;
+  color: white;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.authForm form {
+  width: 90%;
+  padding-bottom: 1em;
+}
+
+.authForm form span {
+  font-size: 11pt;
+}
+
+.authForm span {
+  font-size: 8pt;
+}
+
+.authForm a:link, a:visited {
+  color: #d78be0;
+  text-decoration: none;
+}
+
+.authForm input[type=text], input[type=password] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: block;
+  border: 1px solid #232030;
+  border-radius: 4px;
+  box-sizing: border-box;
+  background-color: #17161e;
+  color: #ffffff;
+  font-size: 11pt;
+}
+
+.authForm button {
+  width: 100%;
+  background-color: #59405C;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 11pt;
+}
+
+.authForm button:hover {
+  background-color: #6a536c;
+}
+
+.authForm input:active, .loginForm input:focus {
+  outline: 0;
+  border: none;
+}
+
+.authForm button:active, .loginForm button:focus {
+  outline: 0;
+  border: none;
+}
+
+.registrationInputBox {
+  display: inline;
+}
+
+.registrationAlertBox {
+  position: absolute; 
+  background-color: #59405C;
+  padding-left: .5em;
+  padding-right: .5em;
+  border-radius: 2px;
+  background: #48435b;
+  outline: 1px solid #1c1a24;
+  box-shadow: 1px 2px #1c1a24;
+  width: 26.5em;
+}
+
+.registrationAlertIcon {
+  color: #d83838;
+  font-size: 11pt !important;
+  padding-left: .25em;
+}
+
+.registrationAlert {
+  color: #d83838;
+  font-size: 8pt !important;
+}
+
+.registrationValidIcon {
+  color: #40d838;
+  font-size: 11pt !important;
+  padding-left: .25em;
+}
+
+.registrationValid {
+  color: #40d838;
+  font-size: 8pt !important;
+}
+
+/* Styling for the Spellbook */
+.spellbook {
+  display: grid;
+  margin: auto;
+  justify-content: center;
+  /* min-width: 1200px;
+  max-width: 1200px; */
+  width: 1180px;
+}
+
+.spellbookTab {
+  display: flex;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  padding: 0;
+  background-color: #59405C;
+}
+
+.tabButton {
+  background-color: #59405C;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.tabButton:hover {
+  background-color: #6a536c;
+}
+
+.tabButton:active, .tabButton:focus {
+  outline: 0;
+  border: none;
+}
+
+.tabButtonSelected {
+  background-color: #47334a;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border-bottom: 4px solid #87556f;
+}
+
+.tabButtonSelected:active, .tabButtonSelected:focus {
+  outline: 0;
+}
+
+/* Styling for the Spellbook components */
+.spellbookPage {
+  display: block;
+  overflow: auto;
+  background-color: #3c4a52;
+}
+
+#noSpells {
+  color: #dddddd;
+  text-align: center;
+}
+
+.spellbookHeader {
+  display: grid;
+  margin: 0;
+  /* padding-left: 15px; */
+  /* padding: 0; */
+  overflow: hidden;
+  background-color: #4B5D67;
+  grid-template-columns: 400px 125px 175px 200px 250px;
+}
+
+.spellbookHeader .headerSpellName {
+  color: #dddddd;
+  margin-left: 15px;
+  margin-right: 15px;
+  /* width: 500px; */
+  flex-wrap: wrap;
+  display: flex;
+  cursor: pointer;
+}
+
+.spellbookHeader .headerSpellLevel {
+  color: #dddddd;
+  margin-left: 15px;
+  margin-right: 15px;
+  /* width: 150px; */
+  flex-wrap: wrap;
+  display: flex;
+  cursor: pointer;
+}
+
+.spellbookHeader .headerSpellSchool {
+  color: #dddddd;
+  margin-left: 15px;
+  margin-right: 15px;
+  /* width: 200px; */
+  flex-wrap: wrap;
+  display: flex;
+  cursor: pointer;
+}
+
+.spellbookHeader .headerSpellAttack {
+  color: #dddddd;
+  margin-left: 15px;
+  margin-right: 15px;
+  /* width: 200px; */
+  flex-wrap: wrap;
+  display: flex;
+  cursor: pointer;
+}
+
+.spellbookHeader .headerSpellEffect {
+  color: #dddddd;
+  margin-left: 15px;
+  margin-right: 15px;
+  /* width: 250px; */
+  flex-wrap: wrap;
+  display: flex;
+  cursor: pointer;
+}
+
+.sortArrow {
+  margin-top: 25px;
+  margin-left: 5px;
+}
+
+.expandSpell {
+  display: inline-block;
+  width: auto;
+}
+
+.spellRef {
+  display: grid;
+  grid-template-columns: 400px 125px 175px 200px 150px auto auto;
+  /* border-top: solid;
+  border-bottom: solid;
+  border-color: #3c4a52; */
+  background-color: #5F6A70;
+  margin-top: 2px;
+  margin-bottom: 2px;
+  cursor: pointer;
+  align-items: center;
+}
+
+.spellRef .spellName {
+  display: flex;
+  margin-left: 15px;
+  margin-right: 15px;
+  /* width: 500px; */
+  flex-wrap: wrap;
+}
+
+.spellRef .spellName h5 {
+  font-weight: normal;
+}
+
+.spellRef .spellLevel {
+  margin-left: 15px;
+  margin-right: 15px;
+  /* width: 150px; */
+  flex-wrap: wrap;
+}
+
+.spellRef .spellSchool {
+  margin-left: 15px;
+  margin-right: 15px;
+  /* width: 200px; */
+  flex-wrap: wrap;
+}
+
+.spellRef .spellAttack {
+  margin-left: 15px;
+  margin-right: 15px;
+  /* width: 200px; */
+  flex-wrap: wrap;
+}
+
+.spellRef .spellEffect {
+  margin-left: 15px;
+  margin-right: 15px;
+  /* width: 200px; */
+  flex-wrap: wrap;
+}
+
+.spellButton {
+  display: inline-block;
+  width: auto;
+  background-color: #59405C;
+  border: none;
+  color: white;
+  margin-left: 25px;
+  margin-right: 20px;
+  padding: 7px 16px;
+  text-align: center;
+  text-decoration: none;
+}
+
+.spellButton:hover {
+  background-color: #6a536c;
+}
+
+.spellButton:active, .spellButton:focus {
+  outline: 0;
+  border: none;
+}
+
+.spellDesc {
+  /* border-style: solid;
+  border-color: #3c4a52; */
+  display: block;
+  background: #5F6A70;
+  margin: 5px;
+  padding: 10px 20px;  
+}
+
+.spellDesc h2 {
+  margin: 0;
+  padding: 0;
+}
+
+.spellDesc p {
+  margin: 0;
+  padding: 0;
+}
+
+/* Styling for the Custom Multi-DropDown Component */
+.dropDown {
+  margin-left: 15px;
+  margin-right: 15px;
+  width: 200px;
+}
+
+.dropDownContainer {
+  display: inline-block;
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 5px;
+  margin-left: 15px;
+  margin-right: 15px;
+  padding-left: 2px;
+  width: 200px;
+  overflow: hidden;
+  position: relative;
+}
+
+.dropDownContainer p {
+  float: left;
+  margin: 0;
+  padding: 0;
+  font-size: 14px;
+  color: gray;
+}
+
+.dropDownList {
+  border-style: solid;
+  border-bottom: none;
+  border-width: 1px;
+  background-color: #ffffff;
+  margin-left: 15px;
+  margin-right: 15px;
+  width: 200px;
+  position: absolute;
+}
+
+.dropDownX {
+  margin: auto;
+  border-left: solid;
+  border-width: 1px;
+  height: 100%;
+  position: absolute;
+  right: 0;
+  top: 0;
+  display: flex;
+  align-items: center
+}
+
+.dropDownX:hover {
+  background-color: red;
+}
+
+.dropDownItem p {
+  border-bottom: solid;
+  border-width: 1px;
+  margin: 0;
+  padding: 0;
+  font-size: 14px;
+  color: #000000;
+}
+
+.dropDownItem p:hover {
+  background-color: lightblue;
+}
+
+.dropDownBox {
+  float: left;
+  margin: 0;
+  padding: 0;
+}
+
+.dropDownSelected {
+  display: inline-block;
+  margin: 1px;
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 5px;
+  padding-left: 2px;
+}
+
+.dropDownSelected p {
+  float: left;
+  margin: 0;
+  padding: 0;
+  font-size: 12px;
+  color: #000000;
+}
+
+.dropDownSelectedX {
+  float: right;
+  margin: auto;
+  margin-left: 5px;
+  border-left: solid;
+  border-width: 1px;
+}
+
+#dropDownSelectedXButton {
+  height:12px;
+}
+
+.dropDownSelectedX:hover {
+  background-color: red;
+}
+
+/* Styling for the Spellbook Filter */
+.Filter {
+  display: flex;
+  background-color: #4B5D67;
+}
+
+.LoadingBox {
+  display: flex;
+  margin: auto;
+  justify-content: center;
+  align-items: center;
+}
+
+.Loading {
+  animation: spin 2s linear infinite;
+  margin: auto;
+  justify-content: center;
+}
+
+.about {
+  margin-left: 25px;
+}
+
+.about h1, .about h2, .about h3, .about h4, .about p, .about li {
+  color: #ffffff;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
