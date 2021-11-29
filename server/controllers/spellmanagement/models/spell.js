@@ -11,7 +11,7 @@ const queries = require('./queries');
 function fetchSpellById(spellId) {
     return new Promise((resolve, reject) => {
         let query = queries.fetchSpellById;
-        db.executeQuery(query, [spellId]).then((results) => {
+        db.executeQuery('tool', query, [spellId]).then((results) => {
             resolve(results[0]);
         }).catch((err) => {
             reject(err);
@@ -26,7 +26,7 @@ function fetchSpellById(spellId) {
 function fetchAllSpells() {
     return new Promise((resolve, reject) => {
         let query = queries.fetchAllSpells;
-        db.executeQuery(query).then((results) => {
+        db.executeQuery('tool', query).then((results) => {
             resolve(results);
         }).catch((err) => {
             reject(err);
@@ -41,7 +41,7 @@ function insertSpell(input) {
         let conditions = (input.conditions != null) ? input.conditions.toString() : input.conditions
         let sourceBook = (input.sourceBook != null) ? input.sourceBook.toString() : input.sourceBook
         let sourcePage = (input.sourcePage != null) ? input.sourcePage.toString() : input.sourcePage
-        db.executeQuery(query, [
+        db.executeQuery('tool', query, [
             input.spellName, input.spellLevel, input.spellSchool, input.castingTime, input.concentration, input.spellRange,
             input.spellComponents.toString(), input.materialComponents, input.duration, input.classes.toString(), input.ritual, input.spellAttack,
             input.spellSave, input.damageType, spellEffects, conditions, input.description, input.descriptionHigherLevels,
