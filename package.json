@@ -1,8 +1,15 @@
 {
   "private": true,
-  "workspaces": ["rpgtool-client", "rpgtool-server"],
+  "workspaces": [
+    "rpgtool-client",
+    "rpgtool-server"
+  ],
   "scripts": {
     "client-start": "cd ./client & yarn start",
     "server-start": "cd ./server & yarn start"
+  },
+  "dependencies": {
+    "redux-devtools-extension": "^2.13.9",
+    "redux-thunk": "^2.4.1"
   }
 }
