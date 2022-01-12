@@ -22,7 +22,7 @@ function checkIfAuthorized() {
     });
 }
 
-function loginUser(usernameOrEmail, password) {
+function authorizeUser(usernameOrEmail, password) {
     return new Promise((resolve, reject) => {
         /**
          * @TODO Create configuration for this endpoint -- hardcoding it for now.
@@ -149,7 +149,7 @@ function checkEmail(email) {
 
 export {
     checkIfAuthorized,
-    loginUser,
+    authorizeUser,
     logoutUser,
     registerUser,
     checkUsername,
