@@ -10,6 +10,8 @@ import { getUser } from '../apis/userAPI';
 import Navbar from './Navbar/Navbar';
 // import Cookies from 'js-cookie'
 
+import coverImage from '../vendor/home.jpg';
+
 /**
  * Temporary "Under Construction" header for the root page. Displays poorly drawn construction stick figure.
  * @returns the created component.
@@ -41,16 +43,11 @@ class UnderConstruction extends React.Component {
 
     render() {
         return (
-                <div className="App">
-                    <header className="App-header">
-                        <Navbar />
-                        <h1>RPG Spell Tracker</h1>
-                        <h2>Welcome, {this.props.name}</h2>
-                        <p>Under construction.</p>
-                        <img src='/poorly-drawn-under-construction.png' alt="under construction" width="250" height="250"/>
-                    </header>
-                </div>
-            )
+            <div>
+                <Navbar></Navbar>
+                <img className='RPGToolIcon' src={coverImage} alt='RPGToolICon' style={{width:'100%',height:'50em'}}/>
+            </div>
+        )
     }
 };
 

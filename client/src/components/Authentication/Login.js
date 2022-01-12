@@ -2,7 +2,11 @@ import React from 'react'
 
 import { Link, Redirect } from 'react-router-dom'
 
-import { checkIfAuthorized, loginUser } from '../../apis/authAPI';
+// import { checkIfAuthorized, loginUser } from '../../apis/authAPI';
+
+import { connect } from 'react-redux';
+
+import { authorizeLogin } from '../../actions/authActions';
 
 // React Icons imports
 import { AiFillExclamationCircle, AiFillCheckCircle } from "react-icons/ai";
@@ -14,20 +18,10 @@ class Login extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            userAuthenticated: undefined,
             usernameOrEmail: '',
             password: '',
             validationErrors: []
         }
-    }
-
-    async componentDidMount() {
-        await checkIfAuthorized().then((authorized) => {
-            this.setState({
-                ...this.state,
-                userAuthenticated: authorized
-            });
-        });
     }
 
     async handleChange(event) {
@@ -37,6 +31,11 @@ class Login extends React.Component {
             [name]: event.target.value
         });
     }
+
+componentDidMount() {
+    console.log(this.props);
+    console.log(this.props.userAuthenticated);
+}
 
     async handleSubmit(event) {
         event.preventDefault();
@@ -48,16 +47,22 @@ class Login extends React.Component {
             validationErrors.push("'Password' is a required field.")
         }
         if (validationErrors.length === 0) {
-            await loginUser(this.state.usernameOrEmail, this.state.password).then((results) => {  
-                if (!results) throw new Error('Invalid Login');
-                this.props.history.push('/');
-            }).catch((err) => {
-                // Handle the error here...
+            await this.props.dispatch(authorizeLogin(this.state.usernameOrEmail, this.state.password));// .then((results) => {  
+                // if (!results) throw new Error('Invalid Login');
+            if (this.props.userAuthenticated) this.props.history.push('/');
+            else {
                 this.setState({
                     ...this.state,
                     validationErrors: ['Unable to login. The provided credentials are invalid.']
                 });
-            });
+            }
+            // }).catch((err) => {
+            //     // Handle the error here...
+            //     this.setState({
+            //         ...this.state,
+            //         validationErrors: ['Unable to login. The provided credentials are invalid.']
+            //     });
+            // });
         } else {
             this.setState({
                 ...this.state,
@@ -67,9 +72,9 @@ class Login extends React.Component {
     }
 
     render() {
-        if (this.state.userAuthenticated == undefined) {
+        if (this.props.userAuthenticated == undefined) {
             return null;
-        } else if (this.state.userAuthenticated) {
+        } else if (this.props.userAuthenticated) {
             return <Redirect to='/' />
         } else {
             return (
@@ -100,4 +105,9 @@ class Login extends React.Component {
     }
 }
 
-export default Login;
+
+const mapStateToProps = (state) => ({
+    userAuthenticated: state.auth.userInfo.authenticated
+});
+
+export default connect(mapStateToProps)(Login);
