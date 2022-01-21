@@ -22,8 +22,8 @@ class UnderConstruction extends React.Component {
         return (
                 <div className="App">
                     <header className="App-header">
-                        <h1>RPG Spell Tracker</h1>
-                        <p>Under construction.</p>
+                        {/* <h1>RPG Spell Tracker</h1> */}
+                        <h1 style={{color: 'white'}}>Under Construction</h1>
                         <img src='/poorly-drawn-under-construction.png' alt="under construction" width="250" height="250"/>
                     </header>
                 </div>

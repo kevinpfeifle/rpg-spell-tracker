@@ -13,7 +13,10 @@ function checkIfAuthorized() {
             withCredentials: true
         };
         axios.get('http://localhost:4000/authentication/login/checkIfAuthorized', config).then((res) => {
-            if (res.data.status === 'success') resolve(res.data.authenticated);
+            if (res.data.status === 'success') resolve({
+                'authenticated': res.data.authenticated,
+                'payload': res.data.payload
+            });
             else reject(res);
         }).catch((err) => {
             console.log(err);
@@ -39,7 +42,10 @@ function authorizeUser(usernameOrEmail, password) {
             'password': password
         };
         axios.post('http://localhost:4000/authentication/login', body, config).then((res) => {
-            if (res.data.status === 'success') resolve(res.data.authenticated);
+            if (res.data.status === 'success') resolve({
+                'authenticated': res.data.authenticated,
+                'payload': res.data.payload
+            });
             else reject(res);
         }).catch((err) => {
             console.log(err);
@@ -89,7 +95,10 @@ function registerUser(username, email, password) {
                 'password': password
         };
         axios.put('http://localhost:4000/authentication/register', body, config).then((res) => {
-            if (res.data.status === 'success') resolve(res.data.authenticated);
+            if (res.data.status === 'success') resolve({
+                'authenticated': res.data.authenticated,
+                'payload': res.data.payload
+            });
             else reject(res);
         }).catch((err) => {
             reject(err);

@@ -2,14 +2,12 @@ import React from 'react'
 
 import { Link, Redirect } from 'react-router-dom'
 
-// import { checkIfAuthorized, loginUser } from '../../apis/authAPI';
-
 import { connect } from 'react-redux';
 
 import { authorizeLogin } from '../../actions/authActions';
 
 // React Icons imports
-import { AiFillExclamationCircle, AiFillCheckCircle } from "react-icons/ai";
+import { AiFillExclamationCircle } from "react-icons/ai";
 
 // Asset imports.
 import LoadingIcon from '../../vendor/d20.png';
@@ -32,11 +30,6 @@ class Login extends React.Component {
         });
     }
 
-componentDidMount() {
-    console.log(this.props);
-    console.log(this.props.userAuthenticated);
-}
-
     async handleSubmit(event) {
         event.preventDefault();
         let validationErrors = [];
@@ -47,8 +40,7 @@ componentDidMount() {
             validationErrors.push("'Password' is a required field.")
         }
         if (validationErrors.length === 0) {
-            await this.props.dispatch(authorizeLogin(this.state.usernameOrEmail, this.state.password));// .then((results) => {  
-                // if (!results) throw new Error('Invalid Login');
+            await this.props.dispatch(authorizeLogin(this.state.usernameOrEmail, this.state.password));
             if (this.props.userAuthenticated) this.props.history.push('/');
             else {
                 this.setState({
@@ -56,13 +48,6 @@ componentDidMount() {
                     validationErrors: ['Unable to login. The provided credentials are invalid.']
                 });
             }
-            // }).catch((err) => {
-            //     // Handle the error here...
-            //     this.setState({
-            //         ...this.state,
-            //         validationErrors: ['Unable to login. The provided credentials are invalid.']
-            //     });
-            // });
         } else {
             this.setState({
                 ...this.state,

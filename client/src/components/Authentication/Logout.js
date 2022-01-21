@@ -4,7 +4,7 @@ import { Redirect } from 'react-router-dom'
 
 import { connect } from 'react-redux';
 
-import { checkIfAuthorized, logoutUser } from '../../apis/authAPI';
+import { logoutUser } from '../../apis/authAPI';
 
 import { logoutUser as logoutUserStore } from '../../actions/authActions';
 
@@ -16,40 +16,36 @@ class Logout extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = {
-            userAuthenticated: undefined
-        }
     }
 
     async logOut() {
-        return new Promise((resolve, reject) => {
-            logoutUser().then((loggedOut) => {
+        return new Promise(async (resolve, reject) => {
+            try {
+                await logoutUser().catch((err) => {
+                    console.log(err); // Most likely the error is the session has already expired. Will need to log this somewhere private outside of browser console.
+                });
                 Cookies.remove('RPGSESID');
-                resolve(loggedOut);
-            });
+                await this.props.dispatch(logoutUserStore());
+                resolve(true);
+            } catch (err) {
+                console.log(err); // This one might be a real error though... Will need to log this somewhere private outside of browser console.
+                resolve(false);
+            }
         });
     }
-
-    async componentDidMount() {
-        if (this.props.userAuthenticated) {
-            await this.logOut().then((loggedOut) => {
-                this.props.dispatch(logoutUserStore());
-            });
-            // } else {
-            //     this.setState({
-            //         ...this.state,
-            //         userAuthenticated: authorized
-            //     });
-            // }
-        } // );
-    }
-
+    
     render() {
+        let component = null;
         if (this.props.userAuthenticated == undefined) {
-            return (<div className='LoadingBox'><img className='Loading' src={LoadingIcon} alt='Loading...' style={{ width: '250px', height: '250px' }} /></div>);
+            component =  (<div className='LoadingBox'><img className='Loading' src={LoadingIcon} alt='Loading...' style={{ width: '250px', height: '250px' }} /></div>);
+        } else if (this.props.userAuthenticated) {
+            this.logOut().then((results) => {
+                component = <Redirect to='/login' />
+            });
         } else {
-            return <Redirect to='/login' />
-        } 
+            component = <Redirect to='/login' />
+        }
+        return component;
     }
 }
 

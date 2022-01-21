@@ -17,7 +17,10 @@ router.post('/', (req, res) => {
         resJson = {
             'status': 'success',
             'authenticated': true,
-            'message': 'User already authenticated'
+            'message': 'User already authenticated',
+            'payload': {
+                'userId': req.session.userId
+            }
         };
         res.status(200).json(resJson);
     } else {
@@ -34,8 +37,11 @@ router.post('/', (req, res) => {
                             req.session.userId = user.user_id;
                             resJson = {
                                 'status': 'success',
-                            'authenticated': true,
-                            'message': 'Access granted'
+                                'authenticated': true,
+                                'message': 'Access granted',
+                                'payload': {
+                                    'userId': req.session.userId
+                                }
                             };
                         }
                         res.status(200).json(resJson);
@@ -68,7 +74,10 @@ router.get('/checkIfAuthorized', (req, res) => {
         res.status(200).json({
             'status': 'success',
             'authenticated': true,
-            'message': 'Access granted'
+            'message': 'Access granted',
+            'payload': {
+                'userId': req.session.userId
+            }
         });
     } else res.status(200).json({
         'status': 'success',

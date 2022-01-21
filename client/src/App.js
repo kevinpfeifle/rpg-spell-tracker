@@ -21,20 +21,14 @@ import Spellbook from './components/Spellbook/Spellbook';
 import { connect } from 'react-redux';
 
 import { authorizeUser } from './apis/authAPI';
-import { loginUserSuccess } from './actions/authActions';
+import { authorizeSession } from './actions/authActions';
 
 class App extends React.Component {
 
     async componentDidMount() {
         // This should run once when the website first loads (aka first render or a refresh).
-        // Determine if the user is still authenticated via their user cookie.
-        await authorizeUser().then((isAuthed) => {
-            if (isAuthed) {
-                console.log('test');
-                // Get the user details and set them into the Redux store.
-                this.props.dispatch(loginUserSuccess());
-            }
-        });
+        // Determine if the user is still authenticated via their user session cookie.
+        await this.props.dispatch(authorizeSession());
     }
 
     render() {

@@ -15,6 +15,7 @@ router.put('/', (req, res) => {
         if (input.password === '' || input.password.length <= 6) {
             // Respond with an error for the password being short.
             res.status(200).json({
+                'status': 'failure',
                 'error': 'password too short'
             });
         } else {
@@ -29,10 +30,16 @@ router.put('/', (req, res) => {
                             req.session.userId  = results.user_id;
                         }
                         res.status(200).json({
-                            'status': 'success'
+                            'status': 'success',
+                            'authenticated': true,
+                            'message': 'User registered, access granted',
+                            'payload': {
+                                'userId': req.session.userId
+                            }
                         });
                     }).catch((err) => {
                         res.status(200).json({
+                            'status': 'failure',
                             'error': err
                         });
                     });
@@ -40,6 +47,7 @@ router.put('/', (req, res) => {
             });
         }
     } else res.status(200).json({
+        'status': 'failure',
         'error': 'missing required parameters'
     });
 });
@@ -56,10 +64,12 @@ router.get('/checkUsername', (req, res) => {
         }).catch((err) => {
             console.log(err);
             res.status(200).json({
+                'status': 'failure',
                 'error': err
             });
         });
     } else res.status(200).json({
+        'status': 'failure',
         'error': 'missing required parameters'
     });
 });
@@ -76,10 +86,12 @@ router.get('/checkEmail', (req, res) => {
         }).catch((err) => {
             console.log(err);
             res.status(200).json({
+                'status': 'failure',
                 'error': err
             }); 
         });
     } else res.status(200).json({
+        'status': 'failure',
         'error': 'missing required parameters'
     });
 });

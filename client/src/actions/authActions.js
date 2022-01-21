@@ -1,6 +1,6 @@
 'use strict'
 
-import { checkIfAuthorized, authorizeUser } from '../apis/authAPI';
+import { checkIfAuthorized, authorizeUser, registerUser } from '../apis/authAPI';
 
 // Auth action types for the Redux Store.
 export const LOGIN_USER = 'LOGIN_USER';
@@ -33,18 +33,15 @@ export const logoutUser = () => ({
 
 // Actions for the Redux Store.
 export function authorizeLogin(usernameOrEmail, password) {
-    console.log('test2');
     return async (dispatch) => {
-        console.log('test4');
         dispatch(loginUser());
         try {
-            await checkIfAuthorized().then(async (userAuthed) => {
-                if (userAuthed) dispatch(loginUserSuccess());
+            await checkIfAuthorized().then(async (res) => {
+                if (res.authenticated) dispatch(loginUserSuccess({userId: res.payload.userId}));
                 else {
                     await authorizeUser(usernameOrEmail, password).then((results) => {  
-                        console.log(results);
-                        if (!results) dispatch(loginUserFailure({payload: results, error: false}));
-                        else dispatch(loginUserSuccess(results));
+                        if (!results) dispatch(loginUserFailure({error: false}));
+                        else dispatch(loginUserSuccess({userId: results.payload.userId}));
                     }).catch((err) => {
                         // Handle the error here...
                         dispatch(loginUserFailure({
@@ -55,7 +52,48 @@ export function authorizeLogin(usernameOrEmail, password) {
                 }
             });
         } catch (err) {
-            dispatch(loginUserFailure(err));
+            dispatch(loginUserFailure({
+                payload: err,
+                error: true
+            }));
         }
     }
+}
+
+export function authorizeSession() {
+    return async (dispatch) => {
+        dispatch(loginUser());
+        try {
+            await checkIfAuthorized().then((res) => {
+                if (res.authenticated) dispatch(loginUserSuccess({userId: res.payload.userId}));
+                else {
+                    dispatch(loginUserFailure({error: false}));
+                }
+            });
+        } catch (err) {
+            dispatch(loginUserFailure({
+                payload: err,
+                error: true
+            }));
+        }
+    }
+}
+
+export function authorizeRegister(username, email, password) {
+    return async (dispatch) => {
+        dispatch(loginUser()); 
+        try {
+            await registerUser(username, email, password).then((res) => {   
+                if (res.authenticated) dispatch(loginUserSuccess({userId: res.payload.userId}));
+                else {
+                    dispatch(loginUserFailure({error: true, payload: res.error}));
+                }
+            });
+        } catch (err) {
+            dispatch(loginUserFailure({
+                payload: err,
+                error: true
+            }));
+        }
+    };
 }

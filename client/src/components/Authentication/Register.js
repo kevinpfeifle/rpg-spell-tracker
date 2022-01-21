@@ -2,7 +2,11 @@ import React from 'react'
 
 import { Link, Redirect } from 'react-router-dom'
 
-import { checkEmail, checkIfAuthorized, checkUsername, registerUser } from '../../apis/authAPI';
+import { connect } from 'react-redux';
+
+import { checkEmail, checkUsername } from '../../apis/authAPI';
+
+import { authorizeRegister } from '../../actions/authActions';
 
 // React Icons imports
 import { AiFillExclamationCircle, AiFillCheckCircle } from "react-icons/ai";
@@ -15,7 +19,6 @@ class Register extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            userAuthenticated: undefined,
             username: {
                 value: '',
                 valid: false,
@@ -47,15 +50,6 @@ class Register extends React.Component {
                 messageVisible: false
             }
         }
-    }
-
-    async componentDidMount() {
-        await checkIfAuthorized().then((authorized) => {
-            this.setState({
-                ...this.state,
-                userAuthenticated: authorized
-            });
-        });
     }
 
     async handleChange(event) {
@@ -210,16 +204,19 @@ class Register extends React.Component {
                 ...this.state,
                 validationErrors: false
             }, async () => {
-                await registerUser(this.state.username.value, this.state.email.value, this.state.password.value).then((results) => {   
-                    this.props.history.push('/');
-                }).catch((err) => {
+                try {
+                    await this.props.dispatch(authorizeRegister(this.state.username.value, this.state.email.value, this.state.password.value));
+                    if (!this.props.userAuthenticated) throw new Error();
+                    else this.props.history.push('/');
+                }
+                catch (err) {
                     // Handle the error here...
                     this.setState({
                         ...this.state,
                         validationErrors: true,
                         validationErrorMessage: 'There was an issue registering your account, try again in a few moments. If the problem persists, please contact us.'
                     });
-                });
+                }
             });
         } else {
             this.setState({
@@ -231,9 +228,9 @@ class Register extends React.Component {
     }
 
     render() {
-        if (this.state.userAuthenticated == undefined) {
+        if (this.props.userAuthenticated == undefined) {
             return null;
-        } else if (this.state.userAuthenticated) {
+        } else if (this.props.userAuthenticated) {
             return <Redirect to='/' />
         } else {
             return (
@@ -394,4 +391,8 @@ class Register extends React.Component {
     }
 }
 
-export default Register;
+const mapStateToProps = (state) => ({
+    userAuthenticated: state.auth.userInfo.authenticated
+});
+
+export default connect(mapStateToProps)(Register);
