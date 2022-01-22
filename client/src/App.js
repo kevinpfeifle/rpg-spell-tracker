@@ -37,15 +37,15 @@ class App extends React.Component {
                 <div className='rpgTool'>
                     {/* <Navbar /> */}
                     <Switch>
-                        <Route exact path='/' component={Introduction} />
-                        <Route path='/sample-spellbook' component={Spellbook} />
-                        <Route path='/spell-compendium' component={UnderConstruction} />
-                        <Route path='/about' component={About} />
-                        <Route path='/login' component={Login} />
-                        <Route path='/register' component={Register} />
-                        <Route path='/logout' component={Logout} />
-                        <Route path='/character' component={Character} />
-                        {/* <Route path='/' component={UnderConstruction} /> */}
+                        <Route exact path='/' render={() => <Introduction />} />
+                        <Route path='/sample-spellbook' render={() => <Spellbook />} />
+                        <Route path='/spell-compendium' render={() => <UnderConstruction />} />
+                        <Route path='/about' render={() => <About />} />
+                        <Route path='/login' render={() => <Login />} />
+                        <Route path='/register' render={() => <Register />} />
+                        <Route path='/logout' render={() => <Logout />} />
+                        <Route path='/character' render={() => (this.props.userAuthenticated) ? <Character /> : <Login />} />
+                        {/* <Route path='/' render={() => <UnderConstruction />} /> */}
                     </Switch>
                 </div>
             </BrowserRouter>
