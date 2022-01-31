@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 
 import { checkEmail, checkUsername } from '../../apis/authAPI';
 
-import { authorizeRegister } from '../../actions/authActions';
+import { authorizeRegister } from '../../actions/userActions';
 
 // React Icons imports
 import { AiFillExclamationCircle, AiFillCheckCircle } from "react-icons/ai";
@@ -392,7 +392,7 @@ class Register extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-    userAuthenticated: state.auth.userInfo.authenticated
+    userAuthenticated: state.user.auth.authenticated
 });
 
 export default connect(mapStateToProps)(Register);

@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 // Asset imports.
 // import LoadingIcon from '../../../vendor/d20.png';
 // import { getUser } from '../apis/userAPI';
-// import { checkAuth } from '../apis/authAPI';
+import { getCharacterOverview } from '../../apis/characterAPI';
 
 import Navbar from '../Navbar/Navbar';
 
@@ -15,7 +15,6 @@ import CharacterInformation from './components/CharacterInformation/CharacterInf
 import Spellbook from '../Spellbook/Spellbook';
 import UnderConstruction from '../UnderConstruction';
 import characterImg from '../../vendor/soot_isbjorn.png';
-// import Cookies from 'js-cookie'
 
 /**
  * Temporary "Under Construction" header for the root page. Displays poorly drawn construction stick figure.
@@ -24,7 +23,6 @@ import characterImg from '../../vendor/soot_isbjorn.png';
 class Character extends React.Component {
     constructor(props) {
         super(props);
-        console.log(this.props.name);
         this.state = {
             selectedTool: 'Spellbook'
         };
@@ -37,24 +35,29 @@ class Character extends React.Component {
         });
     }
 
-    // componentDidMount() {
-    //     // console.log('test');
-    //     getUser().then((details) => {
-    //         // console.log(details);
-    //         if (!details) {
-    //             // Would redirect, display no name;
-    //             this.setState({
-    //                 ...this.state,
-    //                 name: "Guest"
-    //             });
-    //         } else {
-    //             this.setState({
-    //                 ...this.state,
-    //                 name: details.username
-    //             });
-    //         }
-    //     });
-    // }
+    componentDidMount() {
+        // Fetch information about the user's character.
+        getCharacterOverview(this.props.userId, this.props.activeCharacterId).then(() => {
+
+        });
+
+
+        // getUser().then((details) => {
+        //     // console.log(details);
+        //     if (!details) {
+        //         // Would redirect, display no name;
+        //         this.setState({
+        //             ...this.state,
+        //             name: "Guest"
+        //         });
+        //     } else {
+        //         this.setState({
+        //             ...this.state,
+        //             name: details.username
+        //         });
+        //     }
+        // });
+    }
 
     render() {
         return (
@@ -83,7 +86,9 @@ class Character extends React.Component {
 };
 
 const mapStateToProps = (state) => ({
-    name: state.auth.userInfo.username
+    // userAuthenticated: state.auth.userInfo.authenticated,
+    userId: state.user.userInfo.userId
+    // activeCharacterId: state.user.activeCharacterId
 });
 
 export default connect(mapStateToProps)(Character);

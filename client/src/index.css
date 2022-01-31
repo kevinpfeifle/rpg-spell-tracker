@@ -327,7 +327,8 @@ code {
   justify-content: center;
   /* min-width: 1200px;
   max-width: 1200px; */
-  width: 1180px;
+  /* width: 1180px; */
+  min-width: 100%;
 }
 
 .spellbookTab {
@@ -336,6 +337,7 @@ code {
   margin-bottom: 5px;
   padding: 0;
   background-color: #59405C;
+  min-width: 100%;
 }
 
 .tabButton {
@@ -375,11 +377,74 @@ code {
   outline: 0;
 }
 
+/* Styling for the Character componets */
+
+.characterTitle {
+    text-align: center;
+    color: whitesmoke;
+}
+
+.characterTitle h1 {
+    padding: 0;
+    margin: 0;
+}
+
+.characterTitle h3 {
+    padding: 0;
+    margin: 0;
+}
+
+.characterTitle h4 {
+    padding: 0;
+    margin: 0;
+    /* display: inline; */
+}
+
+.characterTitle h5 {
+    padding: 0;
+    margin: 0;
+    /* display: inline; */
+}
+
+/* .characterButtons h3 {
+    display: inline;
+} */
+
+
+.characterButtons h3 {
+    padding: 5px;
+    margin: 0;
+    cursor: pointer;
+}
+
+.characterButtonUnselected {
+    /* color: whitesmoke; */
+    color: white;
+    text-align: left;
+    vertical-align: middle;
+    margin: 0;
+    padding: 1px 1px;
+    cursor: pointer;
+}
+
+.characterButtonSelected {
+    /* color: ; */
+    color: whitesmoke;
+    background-color: #59405C;
+    text-align: left;
+    vertical-align: middle;
+    margin: 0;
+    padding: 1px 10px;
+    border-left: .5em solid #87556f;
+    cursor: pointer;
+}
+
 /* Styling for the Spellbook components */
 .spellbookPage {
   display: block;
   overflow: auto;
   background-color: #3c4a52;
+  min-width: 100%;
 }
 
 #noSpells {
@@ -395,6 +460,7 @@ code {
   overflow: hidden;
   background-color: #4B5D67;
   grid-template-columns: 400px 125px 175px 200px 250px;
+  min-width: 100%;
 }
 
 .spellbookHeader .headerSpellName {
@@ -688,4 +754,118 @@ code {
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
+}
+
+
+
+
+
+/** All the newer and more improved styles will be present below here. **/
+.container {
+    background-color: #2d202e;
+    padding: 1em;
+}
+
+.container-grid-horizontal-menu-body-parent {
+    display: grid;
+    grid-template-areas:
+        'menu main ';
+    grid-template-columns: 1fr 5fr;
+    /* grid-template-rows: 1fr; */
+    grid-gap: 1em;
+    padding-top: 1em;
+    min-width: 100%;
+    min-height: 100%
+}
+
+.container-grid-horizontal-menu-child {
+    padding: 1em;
+    margin-left: 1em;
+    margin-bottom: 1em;
+    grid-area: menu;
+    background-color: #2d202e;
+}
+
+.container-grid-horizontal-body-child {
+    margin-right: 1em;
+    margin-bottom: 1em;
+    grid-area: main;
+}
+
+.container-grid-vertical-menu-body-parent {
+    display: grid;
+    grid-template-areas:
+        'menu'
+        'main';
+    grid-template-rows: auto 1fr;
+    /* grid-template-rows: 1fr; */
+    grid-gap: 1em;
+    /* padding-top: 1em; */
+    min-width: 100%;
+    min-height: 100%
+}
+
+.container-grid-vertical-menu-child {
+    /* padding: 1em; */
+    /* margin-left: 1em; */
+    /* margin-bottom: 1em; */
+    grid-area: menu;
+    /* background-color: #2d202e; */
+}
+
+.container-grid-vertical-body-child {
+    /* padding: 1em; */
+    /* margin-right: 1em; */
+    /* margin-bottom: 1em; */
+    grid-area: main;
+    /* background-color: #2d202e; */
+}
+
+.container-nav {
+    background-color: #2d202e;
+    /* background: linear-gradient(bottom, #2d202e, #2d202e 70%, transparent 70%, transparent 100%); */
+    border-bottom: 4px solid #47334a;
+}
+
+.button-nav {
+    background-color: #2d202e;
+    border: none;
+    color: white;
+    padding: 1em 2em;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12pt;
+    cursor: pointer;
+}
+
+.button-nav:hover {
+    background-color: #6a536c;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.button-nav:active, .button-nav:focus {
+    outline: 0;
+    border: none;
+}
+
+.button-nav--selected {
+    /* background: linear-gradient(#87556f, #47334a); */
+    background-color: #47334a;
+    border: none;
+    color: white;
+    padding: 1em 2em;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12pt;
+    border-top: 4px solid #47334a;
+    /* border-top: 4px solid #87556f; */
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.button-nav--selected:active, .button-nav--selected:focus {
+    outline: 0;
 }

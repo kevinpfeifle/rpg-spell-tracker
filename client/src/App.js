@@ -20,8 +20,7 @@ import Spellbook from './components/Spellbook/Spellbook';
 
 import { connect } from 'react-redux';
 
-import { authorizeUser } from './apis/authAPI';
-import { authorizeSession } from './actions/authActions';
+import { authorizeSession } from './actions/userActions';
 
 class App extends React.Component {
 
@@ -54,8 +53,7 @@ class App extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-    userAuthenticated: state.auth.userInfo.authenticated
+    userAuthenticated: state.user.auth.authenticated
 });
 
 export default connect(mapStateToProps)(App);
-// export default App;

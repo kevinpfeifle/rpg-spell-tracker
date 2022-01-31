@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 
 import { logoutUser } from '../../apis/authAPI';
 
-import { logoutUser as logoutUserStore } from '../../actions/authActions';
+import { logoutUser as logoutUserStore } from '../../actions/userActions';
 
 import Cookies from 'js-cookie'
 
@@ -50,7 +50,7 @@ class Logout extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-    userAuthenticated: state.auth.userInfo.authenticated
+    userAuthenticated: state.user.auth.authenticated
 });
 
 export default connect(mapStateToProps)(Logout);

@@ -52,7 +52,7 @@ class Navbar extends React.Component {
 
 
 const mapStateToProps = (state) => ({
-    userAuthenticated: state.auth.userInfo.authenticated
+    userAuthenticated: state.user.auth.authenticated
 });
 
 export default connect(mapStateToProps)(Navbar);

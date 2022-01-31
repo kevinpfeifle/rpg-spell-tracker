@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-function getUser(userId) {
+function getCharacterOverview(userId, characterId) {
     return new Promise((resolve, reject) => {
         /**
          * @TODO Create configuration for this endpoint -- hardcoding it for now.
@@ -11,18 +11,21 @@ function getUser(userId) {
                 'content-type': 'application/json'
             },
             params: {
-                userid: userId
+                'userId': userId,
+                'characterId': characterId
             },
             withCredentials: true
         };
-        axios.get('http://localhost:4000/usermanagement/user', config).then((res) => {
-            if (res.data.status === 'success') resolve(res.data);
-            else reject(res.data);
+        axios.get('http://localhost:4000/charactermanagement/characteroverview', config).then((res) => {
+            if (res.data.status === 'success') resolve(res.data.data);
+            else reject(res);
         }).catch((err) => {
-            reject(err);
+            console.log(err);
+            resolve(err);
         });
     });
 }
+
 export {
-    getUser
+    getCharacterOverview
 };

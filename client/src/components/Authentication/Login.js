@@ -4,7 +4,7 @@ import { Link, Redirect } from 'react-router-dom'
 
 import { connect } from 'react-redux';
 
-import { authorizeLogin } from '../../actions/authActions';
+import { authorizeLogin } from '../../actions/userActions';
 
 // React Icons imports
 import { AiFillExclamationCircle } from "react-icons/ai";
@@ -41,8 +41,8 @@ class Login extends React.Component {
         }
         if (validationErrors.length === 0) {
             await this.props.dispatch(authorizeLogin(this.state.usernameOrEmail, this.state.password));
-            if (this.props.userAuthenticated) this.props.history.push('/');
-            else {
+            // if (this.props.userAuthenticated) this.props.history.push('/');
+            if (!this.props.userAuthenticated) {
                 this.setState({
                     ...this.state,
                     validationErrors: ['Unable to login. The provided credentials are invalid.']
@@ -92,7 +92,7 @@ class Login extends React.Component {
 
 
 const mapStateToProps = (state) => ({
-    userAuthenticated: state.auth.userInfo.authenticated
+    userAuthenticated: state.user.auth.authenticated
 });
 
 export default connect(mapStateToProps)(Login);

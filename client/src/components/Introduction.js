@@ -19,7 +19,6 @@ import coverImage from '../vendor/home.jpg';
 class UnderConstruction extends React.Component {
     constructor(props) {
         super(props);
-        console.log(this.props.name);
     }
 
     // componentDidMount() {
@@ -46,13 +45,14 @@ class UnderConstruction extends React.Component {
             <div>
                 <Navbar></Navbar>
                 <img className='RPGToolIcon' src={coverImage} alt='RPGToolICon' style={{width:'100%',height:'50em'}}/>
+                <p>{this.props.name}</p>
             </div>
         )
     }
 };
 
 const mapStateToProps = (state) => ({
-    name: state.auth.userInfo.username
+    name: state.user.userInfo.username
 });
 
 export default connect(mapStateToProps)(UnderConstruction);
