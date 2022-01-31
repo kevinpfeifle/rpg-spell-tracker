@@ -766,6 +766,22 @@ code {
     padding: 1em;
 }
 
+.container-translucent {
+    background: rgba(45, 32, 46,0.5);
+    padding: 1em;
+}
+
+.container-rounded-corners {
+    border-radius: 25px;
+}
+
+.container-centered-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
 .container-grid-horizontal-menu-body-parent {
     display: grid;
     grid-template-areas:
@@ -868,4 +884,20 @@ code {
 
 .button-nav--selected:active, .button-nav--selected:focus {
     outline: 0;
+}
+
+.noPage {
+    background: url("./vendor/owlbear.png") no-repeat center center;
+    background-size: cover;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    color: white;
+}
+
+.noPage a {
+    color: white;
 }
