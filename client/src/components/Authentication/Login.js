@@ -64,7 +64,7 @@ class Login extends React.Component {
         } else {
             return (
                 <div className='authPage'>
-                    <img className='RPGToolIcon' src={LoadingIcon} alt='RPGToolICon' style={{width:'5em',height:'5em'}}/>
+                    <Link exact to='/'><img className='RPGToolIcon' src={LoadingIcon} alt='RPGToolICon' style={{width:'5em',height:'5em'}}/></Link>
                     <div className='authForm'>
                         <h2>Hail, Adventurer!</h2>
                         <form onSubmit={this.handleSubmit.bind(this)}>
