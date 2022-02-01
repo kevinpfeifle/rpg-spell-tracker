@@ -27,6 +27,7 @@ router.get('/', (req, res) => {
                         resJson.data = results;
                         res.status(200).json(resJson);
                     } else {
+                        // TODO: Eventually allow for checking if other users are allowed to access this resource, IE owner allows another user to see it.
                         // Give no data back, user doesn't own this resource.
                         resJson.message = 'Access denied, user does not have permission to access this resource';
                         res.status(403).send(resJson);
