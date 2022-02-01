@@ -2,6 +2,7 @@
 
 const fetchCharacterOverview = `select 
         character_id,
+        user_id,
         character_name,
         character_level,
         character_race,
@@ -14,8 +15,7 @@ const fetchCharacterOverview = `select
     from 
         character.character 
     where 
-        user_id = $1 and 
-        character_id = $2 and 
+        character_id = $1 and 
         active_ind = true;`;
 
 module.exports = {
