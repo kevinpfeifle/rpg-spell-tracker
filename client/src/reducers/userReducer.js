@@ -50,7 +50,7 @@ const authReducer = (state = initState, action) => {
             userInfo = {...state.userInfo};
             userInfo.username = action.payload.username;
             userPreferences = {...state.userPreferences};
-            userPreferences.activeCharacterId = action.payload.active_character_id;
+            userPreferences.activeCharacterId = (action.payload.active_character_id != null) ? action.payload.active_character_id : -1;
             return { ...state, userInfo: userInfo, userPreferences: userPreferences, loading: false }; 
         case actions.FETCH_USER_PREFERENCES_FAILURE:
             // In this scenario, we are still authenticated as user, but the query failed, so initalized the userPreferences to default.

@@ -901,3 +901,19 @@ code {
 .noPage a {
     color: white;
 }
+
+.accessDenied {
+    background: url("./vendor/guards.jpg") no-repeat center center;
+    background-size: cover;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    color: white;
+}
+
+.accessDenied a {
+    color: white;
+}

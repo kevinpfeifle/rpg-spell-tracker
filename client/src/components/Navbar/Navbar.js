@@ -22,7 +22,7 @@ class Navbar extends React.Component {
                 <div className='navbar'>
                     <div className='navLeft'>
                         <NavLink exact to='/'><img className='RPGToolIcon' src={LoadingIcon} alt='RPGToolICon' style={{width:'50px',height:'50px'}}/></NavLink>
-                        <NavLink exact to='/character'><h4>My Character</h4></NavLink>
+                        <NavLink to={{pathname: '/character/' + this.props.activeCharacterId}}><h4>My Character</h4></NavLink>
                         <NavLink exact to='/sample-spellbook'><h4>Sample Spellbook</h4></NavLink>
                         <NavLink exact to='/spell-compendium'><h4>Spell Compendium</h4></NavLink>
                         <NavLink exact to='/about'><h4>About</h4></NavLink>
@@ -33,7 +33,7 @@ class Navbar extends React.Component {
                             <NavLink exact to='/logout'><h4>Log Out</h4></NavLink> :
                                 // <NavLink exact to='/login'><img className='LoginIcon' src={LoginIcon} alt='LoginIcon' style={{width:'50px',height:'50px'}}/></NavLink> :
                                 <div>
-                                    <NavLink exact to='/login' onClick={() => console.log('test')}><h4>Log In</h4></NavLink>
+                                    <NavLink exact to='/login'><h4>Log In</h4></NavLink>
                                     <NavLink exact to='/register'><h4 className='navRegister'>Register</h4></NavLink>
                                 </div>
                         }
@@ -52,7 +52,9 @@ class Navbar extends React.Component {
 
 
 const mapStateToProps = (state) => ({
-    userAuthenticated: state.user.auth.authenticated
+    userAuthenticated: state.user.auth.authenticated,
+    userId: state.user.userInfo.userId,
+    activeCharacterId: state.user.userPreferences.activeCharacterId
 });
 
 export default connect(mapStateToProps)(Navbar);

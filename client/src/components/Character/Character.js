@@ -5,8 +5,10 @@ import { connect } from 'react-redux';
 // Asset imports.
 // import LoadingIcon from '../../../vendor/d20.png';
 // import { getUser } from '../apis/userAPI';
-import { getCharacterOverview } from '../../apis/characterAPI';
+import { getCharacterOverview } from '../../actions/characterActions';
 
+import AccessDenied from '../AccessDenied';
+import RouteNotFound from '../RouteNotFound';
 import Navbar from '../Navbar/Navbar';
 
 import CharacterInfoPanel from './components/CharacterInfoPanel/CharacterInfoPanel';
@@ -24,7 +26,7 @@ class Character extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            selectedTool: 'Spellbook'
+            selectedTool: null
         };
     }
 
@@ -37,58 +39,55 @@ class Character extends React.Component {
 
     componentDidMount() {
         // Fetch information about the user's character.
-        getCharacterOverview(this.props.userId, this.props.activeCharacterId).then(() => {
+        this.props.dispatch(getCharacterOverview(this.props.characterId));
+    }
 
-        });
-
-
-        // getUser().then((details) => {
-        //     // console.log(details);
-        //     if (!details) {
-        //         // Would redirect, display no name;
-        //         this.setState({
-        //             ...this.state,
-        //             name: "Guest"
-        //         });
-        //     } else {
-        //         this.setState({
-        //             ...this.state,
-        //             name: details.username
-        //         });
-        //     }
-        // });
+    componentDidUpdate(prevProps) {
+        // This logic will fire after the data is set in redux so that we can get the default tool, update the state to that tool, and pass it down.
+        if (this.state.selectedTool == null) {
+            if (this.props.character != null && this.props.character.characterOverview != null) {
+                this.setSelectedTool(this.props.character.characterOverview.defaultTool);
+            }
+        }
     }
 
     render() {
-        return (
-            <div>
-                <Navbar></Navbar>
-                <div class='container-grid-horizontal-menu-body-parent'>
-
-                        <div class='container-grid-horizontal-menu-child'>
-                            <CharacterInfoPanel selectedTool={this.state.selectedTool} setTool={this.setSelectedTool.bind(this)}></CharacterInfoPanel>
+        if (this.props.character == null) {
+            return null;
+        } else {
+            if (this.props.character.characterExists === false) {
+                return <RouteNotFound />
+            } else if (this.props.character.authorizedUser === false) {
+                return <AccessDenied />
+            } else {
+                return (
+                    <div>
+                        <Navbar></Navbar>
+                        <div className='container-grid-horizontal-menu-body-parent'>
+                            <div className='container-grid-horizontal-menu-child'>
+                                <CharacterInfoPanel characterId={this.props.characterId} selectedTool={this.state.selectedTool} setTool={this.setSelectedTool.bind(this)}></CharacterInfoPanel>
+                            </div>
+                            <div className='container-grid-horizontal-body-child'>
+                                {
+                                    (this.state.selectedTool === 'Information')  && <CharacterInformation />
+                                }
+                                {
+                                    (this.state.selectedTool === 'Spellbook') && <Spellbook />
+                                }
+                                {
+                                    (this.state.selectedTool === 'Character Sheet') && <UnderConstruction />
+                                }
+                            </div>
                         </div>
-                        <div class='container-grid-horizontal-body-child'>
-                            {
-                                (this.state.selectedTool === 'Information')  && <CharacterInformation />
-                            }
-                            {
-                                (this.state.selectedTool === 'Spellbook') && <Spellbook />
-                            }
-                            {
-                                (this.state.selectedTool === 'Character Sheet') && <UnderConstruction />
-                            }
-                        </div>
-                </div>
-            </div>
-        )
+                    </div>
+                )
+            }
+        }
     }
 };
 
-const mapStateToProps = (state) => ({
-    // userAuthenticated: state.auth.userInfo.authenticated,
-    userId: state.user.userInfo.userId
-    // activeCharacterId: state.user.activeCharacterId
+const mapStateToProps = (state, ownProps) => ({
+    character: state.character[ownProps.characterId]
 });
 
 export default connect(mapStateToProps)(Character);

@@ -1,5 +1,3 @@
-'use strict'
-
 import { checkIfAuthorized, authorizeUser, registerUser } from '../apis/authAPI';
 
 import { getUser } from '../apis/userAPI';
@@ -139,7 +137,7 @@ export function getUserPreferences(userId) {
         dispatch(fetchUserPreferences());
         try {
             await getUser(userId).then((res) => {
-                if (res.data && res.data.length != {}) dispatch(fetchUserPreferencesSuccess(res.data));
+                if (res.data && res.data.length !== {}) dispatch(fetchUserPreferencesSuccess(res.data));
                 else dispatch(fetchUserPreferencesFailure({data: res.data, error: true}));
             });
         } catch (err) {

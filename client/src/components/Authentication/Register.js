@@ -235,7 +235,7 @@ class Register extends React.Component {
         } else {
             return (
                 <div className="authPage">
-                    <Link exact to='/'><img className='RPGToolIcon' src={LoadingIcon} alt='RPGToolICon' style={{width:'5em',height:'5em'}}/></Link>
+                    <Link to='/'><img className='RPGToolIcon' src={LoadingIcon} alt='RPGToolICon' style={{width:'5em',height:'5em'}}/></Link>
                     <div className='authForm'>
                         <h2>Embark On Your Journey!</h2>
                         <form onSubmit={this.handleSubmit.bind(this)}>

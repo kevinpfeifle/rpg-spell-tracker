@@ -1,7 +1,5 @@
 import React from 'react'
 
-import { connect } from 'react-redux';
-
 /**
  * Temporary "Under Construction" header for the root page. Displays poorly drawn construction stick figure.
  * @returns the created component.
@@ -26,9 +24,4 @@ class InfoPanelButton extends React.Component {
         )
     }
 };
-
-const mapStateToProps = (state) => ({
-    name: state.user.userInfo.username
-});
-
-export default connect(mapStateToProps)(InfoPanelButton);
+export default InfoPanelButton;
