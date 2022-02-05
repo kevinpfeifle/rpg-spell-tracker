@@ -3,7 +3,6 @@ import React from 'react'
 import { connect } from 'react-redux';
 // Asset imports.
 
-import characterImg from '../../../../vendor/soot_isbjorn.png';
 // React Icons imports
 import { RiAccountBoxLine, RiFilePaper2Line, RiTShirt2Line, RiSwordLine, RiGitRepositoryLine, RiMapPin2Line, RiGroupLine, RiQuillPenLine, RiBookletLine, RiCalendar2Line, RiSettings2Line } from "react-icons/ri";
 
