@@ -71,10 +71,34 @@ class Character extends React.Component {
                                     (this.state.selectedTool === 'Information')  && <CharacterInformation />
                                 }
                                 {
+                                    (this.state.selectedTool === 'Character Sheet') && <UnderConstruction />
+                                }
+                                {
+                                    (this.state.selectedTool === 'Equipment') && <UnderConstruction />
+                                }
+                                {
+                                    (this.state.selectedTool === 'Inventory') && <UnderConstruction />
+                                }
+                                {
                                     (this.state.selectedTool === 'Spellbook') && <Spellbook />
                                 }
                                 {
-                                    (this.state.selectedTool === 'Character Sheet') && <UnderConstruction />
+                                    (this.state.selectedTool === 'Quests') && <UnderConstruction />
+                                }
+                                {
+                                    (this.state.selectedTool === 'Relationships') && <UnderConstruction />
+                                }
+                                {
+                                    (this.state.selectedTool === 'Journal') && <UnderConstruction />
+                                }
+                                {
+                                    (this.state.selectedTool === 'Notebook') && <UnderConstruction />
+                                }
+                                {
+                                    (this.state.selectedTool === 'Calendar') && <UnderConstruction />
+                                }
+                                {
+                                    (this.state.selectedTool === 'Settings') && <UnderConstruction />
                                 }
                             </div>
                         </div>
