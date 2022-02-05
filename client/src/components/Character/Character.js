@@ -11,7 +11,7 @@ import AccessDenied from '../AccessDenied';
 import RouteNotFound from '../RouteNotFound';
 import Navbar from '../Navbar/Navbar';
 
-import CharacterInfoPanel from './components/CharacterInfoPanel/CharacterInfoPanel';
+import CharacterOverview from './components/CharacterOverview/CharacterOverview';
 import CharacterInformation from './components/CharacterInformation/CharacterInformation';
 
 import Spellbook from '../Spellbook/Spellbook';
@@ -64,7 +64,7 @@ class Character extends React.Component {
                         <Navbar></Navbar>
                         <div className='container-grid-horizontal-menu-body-parent'>
                             <div className='container-grid-horizontal-menu-child'>
-                                <CharacterInfoPanel characterId={this.props.characterId} selectedTool={this.state.selectedTool} setTool={this.setSelectedTool.bind(this)}></CharacterInfoPanel>
+                                <CharacterOverview characterId={this.props.characterId} selectedTool={this.state.selectedTool} setTool={this.setSelectedTool.bind(this)}></CharacterOverview>
                             </div>
                             <div className='container-grid-horizontal-body-child'>
                                 {

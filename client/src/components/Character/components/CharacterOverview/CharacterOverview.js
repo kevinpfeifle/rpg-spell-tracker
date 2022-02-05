@@ -13,7 +13,7 @@ import CharacterPortrait from './components/CharacterPortrait';
  * Temporary "Under Construction" header for the root page. Displays poorly drawn construction stick figure.
  * @returns the created component.
  */
-class CharacterInfoPanel extends React.Component {
+class CharacterOverview extends React.Component {
     constructor(props) {
         super(props);
     }
@@ -64,4 +64,4 @@ const mapStateToProps = (state, ownProps) => ({
     character: state.character[ownProps.characterId]
 });
 
-export default connect(mapStateToProps)(CharacterInfoPanel);
+export default connect(mapStateToProps)(CharacterOverview);
