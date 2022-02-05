@@ -16,7 +16,6 @@ import CharacterInformation from './components/CharacterInformation/CharacterInf
 
 import Spellbook from '../Spellbook/Spellbook';
 import UnderConstruction from '../UnderConstruction';
-import characterImg from '../../vendor/soot_isbjorn.png';
 
 /**
  * Temporary "Under Construction" header for the root page. Displays poorly drawn construction stick figure.

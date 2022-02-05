@@ -36,6 +36,66 @@ function getCharacterOverview(characterId) {
     });
 }
 
+function getCharacterPortrait(characterId, userId) {
+    return new Promise((resolve, reject) => {
+        /**
+         * @TODO Create configuration for this endpoint -- hardcoding it for now.
+         */
+        let config = {
+            headers: {
+                'sender': 'rpgtool',
+                'content-type': 'application/json'
+            },
+            params: {
+                'characterid': characterId,
+                'userid': userId
+            },
+            withCredentials: true
+        };
+        axios.get('http://localhost:4000/charactermanagement/characterportrait', config).then((res) => {
+            if (res.data.status === 'success') {
+                resolve(res.data.data);
+            }
+            else throw new Error(res);
+        }).catch((err) => {
+            // May need to update this later to catch certain codes, but I think 201 is the only real success.
+            reject(err);
+        });
+    });
+}
+
+function setCharacterPortrait(portraitBase64, portraitEncodeTag, characterId, userId) {
+    return new Promise((resolve, reject) => {
+        /**
+         * @TODO Create configuration for this endpoint -- hardcoding it for now.
+         */
+        let config = {
+            headers: {
+                'sender': 'rpgtool',
+                'content-type': 'application/json'
+            },
+            withCredentials: true
+        };
+        let body = {
+            'portraitBase64': portraitBase64,
+            'portraitEncodeTag': portraitEncodeTag,
+            'characterId': characterId,
+            'userId': userId
+        };
+        axios.put('http://localhost:4000/charactermanagement/characterportrait', body, config).then((res) => {
+            if (res.data.status === 'success') {
+                resolve(res.data);
+            }
+            else throw new Error(res);
+        }).catch((err) => {
+            // May need to update this later to catch certain codes, but I think 201 is the only real success.
+            reject(err);
+        });
+    });
+}
+
 export {
-    getCharacterOverview
+    getCharacterOverview,
+    getCharacterPortrait,
+    setCharacterPortrait
 };

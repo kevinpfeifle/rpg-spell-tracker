@@ -766,6 +766,11 @@ code {
     padding: 1em;
 }
 
+.container-alternate {
+    background-color: #47334a;
+    padding: 1em;
+}
+
 .container-translucent {
     background: rgba(45, 32, 46,0.5);
     padding: 1em;
@@ -780,6 +785,10 @@ code {
     justify-content: center;
     align-items: center;
     flex-direction: column;
+}
+
+.container-squared {
+    aspect-ratio: 1 / 1;
 }
 
 .container-grid-horizontal-menu-body-parent {
@@ -916,4 +925,8 @@ code {
 
 .accessDenied a {
     color: white;
+}
+
+#portraitUpload {
+    display: none;
 }

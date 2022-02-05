@@ -1,20 +1,14 @@
 import React from 'react'
 
-// import { Link } from 'react-router-dom'
 import { connect } from 'react-redux';
 // Asset imports.
-// import LoadingIcon from '../../../vendor/d20.png';
-// import { getUser } from '../apis/userAPI';
-// import { checkAuth } from '../apis/authAPI';
 
 import characterImg from '../../../../vendor/soot_isbjorn.png';
-
-// import Cookies from 'js-cookie'
-
 // React Icons imports
 import { RiAccountBoxLine, RiFilePaper2Line, RiTShirt2Line, RiSwordLine, RiGitRepositoryLine, RiMapPin2Line, RiGroupLine, RiQuillPenLine, RiBookletLine, RiCalendar2Line, RiSettings2Line } from "react-icons/ri";
 
 import InfoPanelButton from './components/InfoPanelButton';
+import CharacterPortrait from './components/CharacterPortrait';
 
 /**
  * Temporary "Under Construction" header for the root page. Displays poorly drawn construction stick figure.
@@ -36,13 +30,14 @@ class CharacterInfoPanel extends React.Component {
             let characterDetails = this.props.character.characterOverview;
             return (
                 <div>
-                    <img className='RPGToolIcon' src={characterImg} alt='RPGToolICon' style={{width:'100%', height: 'auto'}}/>
+                    {/* <img className='RPGToolIcon' src={characterImg} alt='RPGToolICon' style={{width:'100%', height: 'auto'}}/> */}
+                    <CharacterPortrait characterId={characterDetails.characterId} />
                     <div className='characterTitle'>
                         <h1>{characterDetails.characterName}</h1>
                         <h3>{characterDetails.characterRace}, {characterDetails.characterBackground}</h3>
                         {
                             characterDetails.characterClasses.map((charClass, index) => (
-                            <h4>{characterDetails.classLevels[index]} {charClass} ({characterDetails.classSubclasses[index]})</h4>
+                                <h4 key={index}>{characterDetails.classLevels[index]} {charClass} ({characterDetails.classSubclasses[index]})</h4>
                             ))
                         }
                         <hr></hr>
