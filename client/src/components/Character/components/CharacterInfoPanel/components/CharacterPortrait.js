@@ -58,7 +58,9 @@ class CharacterPortrait extends React.Component {
 
     render() {
         if (this.state.portraitFound == null) {
-            return null;
+            return (
+                <div className='container-alternate container-centered-content container-squared'></div>
+            );
         } else if (this.state.portraitFound === false || this.state.portraitString === '' || this.state.portraitEncodeTag === '') {
             return (
                 <div>  
