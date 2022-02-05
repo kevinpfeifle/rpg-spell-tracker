@@ -25,7 +25,7 @@ class NoBackstory extends React.Component {
 };
 
 const mapStateToProps = (state) => ({
-    name: state.auth.userInfo.username
+    // name: state.auth.userInfo.username
 });
 
 export default connect(mapStateToProps)(NoBackstory);
