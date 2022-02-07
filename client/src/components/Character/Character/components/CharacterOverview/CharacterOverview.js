@@ -35,7 +35,7 @@ class CharacterOverview extends React.Component {
                         <h1>{characterDetails.characterName}</h1>
                         <h3>{characterDetails.characterRace}, {characterDetails.characterBackground}</h3>
                         {
-                            characterDetails.characterClasses.map((charClass, index) => (
+                            (characterDetails.characterClasses != null) && characterDetails.characterClasses.map((charClass, index) => (
                                 <h4 key={index}>{characterDetails.classLevels[index]} {charClass} ({characterDetails.classSubclasses[index]})</h4>
                             ))
                         }

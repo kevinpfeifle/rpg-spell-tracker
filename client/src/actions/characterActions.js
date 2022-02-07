@@ -27,18 +27,20 @@ export const fetchCharacterOverviewFailure = (characterFail) => ({
 });
 
 // Character actions for the Redux Store.
-export function getCharacterOverview(characterId) {
+export function getCharacterOverview(userId, characterId) {
     return (dispatch) => {
         dispatch(fetchCharacterOverview());
         try {
-            characterOverview(characterId).then((characterResults) => {
-                if (characterResults.authorizedUser && characterResults.characterExists) {
-                    // Character exists, and the user is allowed to access the data related to it.
-                    dispatch(fetchCharacterOverviewSuccess(characterResults));
-                } else {
-                    // Either the character doesn't exist, or the user is unauthorized.
-                    dispatch(fetchCharacterOverviewFailure({payload: characterResults, error: null}))
-                }
+            characterOverview(userId, characterId).then((characterResults) => {
+                characterResults.forEach((character) => {
+                    if (character.authorizedUser && character.characterExists) {
+                        // Character exists, and the user is allowed to access the data related to it.
+                        dispatch(fetchCharacterOverviewSuccess(character));
+                    } else {
+                        // Either the character doesn't exist, or the user is unauthorized.
+                        dispatch(fetchCharacterOverviewFailure({payload: character, error: null}))
+                    }
+                });
             });
         } catch (err) {
             dispatch(fetchCharacterOverviewFailure({

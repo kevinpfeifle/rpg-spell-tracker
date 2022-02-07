@@ -35,14 +35,24 @@ class Character extends React.Component {
 
     componentDidMount() {
         // Fetch information about the user's character.
-        this.props.dispatch(getCharacterOverview(this.props.characterId));
+        if (this.props.character == null) this.props.dispatch(getCharacterOverview(this.props.userId, this.props.characterId));
+        else {
+            if (this.state.selectedTool == null) {
+                if (this.props.character != null && this.props.character.characterOverview != null) {
+                    this.setSelectedTool(this.props.character.characterOverview.defaultTool);
+                }
+            }
+        }
     }
 
     componentDidUpdate(prevProps) {
-        // This logic will fire after the data is set in redux so that we can get the default tool, update the state to that tool, and pass it down.
-        if (this.state.selectedTool == null) {
-            if (this.props.character != null && this.props.character.characterOverview != null) {
-                this.setSelectedTool(this.props.character.characterOverview.defaultTool);
+        if (this.props.character == null) this.componentDidMount();
+        else {
+            // This logic will fire after the data is set in redux so that we can get the default tool, update the state to that tool, and pass it down.
+            if (this.state.selectedTool == null) {
+                if (this.props.character != null && this.props.character.characterOverview != null) {
+                    this.setSelectedTool(this.props.character.characterOverview.defaultTool);
+                }
             }
         }
     }
@@ -107,6 +117,7 @@ class Character extends React.Component {
 };
 
 const mapStateToProps = (state, ownProps) => ({
+    userId: state.user.userInfo.userId,
     character: state.character[ownProps.characterId]
 });
 

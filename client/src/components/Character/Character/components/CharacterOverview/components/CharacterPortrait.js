@@ -85,7 +85,6 @@ class CharacterPortrait extends React.Component {
 
 const mapStateToProps = (state, ownProps) => ({
     userId: state.user.userInfo.userId,
-    test: ownProps.characterId,
     character: state.character[ownProps.characterId]
 });
 

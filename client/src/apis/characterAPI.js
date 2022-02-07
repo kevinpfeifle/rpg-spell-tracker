@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-function getCharacterOverview(characterId) {
+function getCharacterOverview(userId, characterId) {
     return new Promise((resolve, reject) => {
         /**
          * @TODO Create configuration for this endpoint -- hardcoding it for now.
@@ -11,23 +11,28 @@ function getCharacterOverview(characterId) {
                 'content-type': 'application/json'
             },
             params: {
-                'characterid': characterId
+                'userid': userId
             },
             withCredentials: true
         };
+        if (characterId != null) config.params.characterid = characterId; // Add the characterId if we are fetching a single character overview. 
         axios.get('http://localhost:4000/charactermanagement/characteroverview', config).then((res) => {
             if (res.data.status === 'success') {
-                res.data.data.authorizedUser = true;
-                res.data.data.characterExists = true;
+                for (let character of res.data.data) {
+                    character.authorizedUser = true;
+                    character.characterExists = true;
+                }
                 resolve(res.data.data);
             }
             else throw new Error(res);
         }).catch((err) => {
             if (err.response) {
                 if (err.response.status === 401 || err.response.status === 403) {
-                    resolve({characterId: characterId, 'authorizedUser': false});
+                    if (characterId != null) resolve([{characterId: characterId, 'authorizedUser': false}]); 
+                    else resolve([{}]);
                 } else if (err.response.status === 404) {
-                    resolve({characterId: characterId, 'characterExists': false});
+                    if (characterId != null) resolve([{characterId: characterId, 'characterExists': false}]);
+                    else resolve([{}]);
                 } else reject(err); // All other codes are an error for this resource.
             } else {
                 reject(err);
