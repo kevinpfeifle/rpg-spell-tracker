@@ -1,21 +1,18 @@
 import React from 'react'
 
-// import { Link } from 'react-router-dom'
 import { connect } from 'react-redux';
-// Asset imports.
-// import LoadingIcon from '../../../vendor/d20.png';
-// import { getUser } from '../apis/userAPI';
-import { getCharacterOverview } from '../../actions/characterActions';
 
-import AccessDenied from '../AccessDenied';
-import RouteNotFound from '../RouteNotFound';
-import Navbar from '../Navbar/Navbar';
+import { getCharacterOverview } from '../../../actions/characterActions';
+
+import AccessDenied from '../../AccessDenied';
+import RouteNotFound from '../../RouteNotFound';
+import Navbar from '../../Navbar/Navbar';
 
 import CharacterOverview from './components/CharacterOverview/CharacterOverview';
 import CharacterInformation from './components/CharacterInformation/CharacterInformation';
 
-import Spellbook from '../Spellbook/Spellbook';
-import UnderConstruction from '../UnderConstruction';
+import Spellbook from '../../Spellbook/Spellbook';
+import UnderConstruction from '../../UnderConstruction';
 
 /**
  * Temporary "Under Construction" header for the root page. Displays poorly drawn construction stick figure.

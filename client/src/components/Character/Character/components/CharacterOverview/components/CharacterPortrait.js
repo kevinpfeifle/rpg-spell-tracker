@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 import { RiCameraLine } from 'react-icons/ri';
 
-import { getCharacterPortrait, setCharacterPortrait }  from '../../../../../apis/characterAPI';
+import { getCharacterPortrait, setCharacterPortrait }  from '../../../../../../apis/characterAPI';
 
 /**
  * Temporary "Under Construction" header for the root page. Displays poorly drawn construction stick figure.

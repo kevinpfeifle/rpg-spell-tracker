@@ -12,7 +12,7 @@ import RouteNotFound from './components/RouteNotFound';
 
 // import Footer from './components/Footer';
 // import Navbar from './components/Navbar/Navbar';
-import Character from './components/Character/Character';
+import Character from './components/Character/Character/Character';
 import Login from './components/Authentication/Login';
 import Logout from './components/Authentication/Logout';
 import Register from './components/Authentication/Register';
