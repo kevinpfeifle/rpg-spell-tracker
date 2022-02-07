@@ -8,6 +8,7 @@ const fetchCharacterOverview = `select
         character_race,
         character_background,
         character_alignment,
+        character_overview,
         character_classes,
         class_levels,
         class_subclasses,
@@ -16,6 +17,25 @@ const fetchCharacterOverview = `select
         character.character 
     where 
         character_id = $1 and 
+        active_ind = true;`;
+
+const fetchAllCharacterOverviews = `select 
+        character_id,
+        user_id,
+        character_name,
+        character_level,
+        character_race,
+        character_background,
+        character_alignment,
+        character_overview,
+        character_classes,
+        class_levels,
+        class_subclasses,
+        default_tool
+    from 
+        character.character 
+    where 
+        user_id = $1 and 
         active_ind = true;`;
 
 const fetchCharacterOwnership = `select 
@@ -58,6 +78,7 @@ const upsertCharacterPortrait = `insert into
 
 module.exports = {
     fetchCharacterOverview: fetchCharacterOverview,
+    fetchAllCharacterOverviews: fetchAllCharacterOverviews,
     fetchCharacterOwnership: fetchCharacterOwnership,
     fetchCharacterPortrait: fetchCharacterPortrait,
     upsertCharacterPortrait: upsertCharacterPortrait

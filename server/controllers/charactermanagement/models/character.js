@@ -14,6 +14,18 @@ function fetchCharacterOverview(characterId) {
     });
 }
 
+function fetchAllCharacterOverviews(userId) {
+    return new Promise((resolve, reject) => {
+        let query = queries.fetchAllCharacterOverviews;
+        db.executeQuery('tool', query, [userId]).then((results) => {
+            resolve(results);
+        }).catch((err) => {
+            reject(err);
+        });
+    });
+}
+
 module.exports = {
-    fetchCharacterOverview: fetchCharacterOverview
+    fetchCharacterOverview: fetchCharacterOverview,
+    fetchAllCharacterOverviews: fetchAllCharacterOverviews
 };

@@ -29,7 +29,10 @@ router.get('/', (req, res) => {
                                 resJson.message = 'Character portrait retrieved';
                                 resJson.data = portraitResults;
                                 res.status(200).json(resJson);
-                            } else throw new Error();
+                            } else {
+                                resJson.message = 'Resource does not exist, for characterId ' + req.query.characterid;
+                                res.status(404).send(resJson);
+                            }
                         }).catch((err) => {
                             resJson.message = 'Error encountered fetching character portrait';
                             resJson.error = err;
