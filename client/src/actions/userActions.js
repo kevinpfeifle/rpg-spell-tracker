@@ -1,6 +1,6 @@
 import { checkIfAuthorized, authorizeUser, registerUser } from '../apis/authAPI';
 
-import { getUser } from '../apis/userAPI';
+import { getUser, updateFavoriteCharacter } from '../apis/userAPI';
 
 // User action types for the Redux Store.
 // Actions specific to authorizing the user.
@@ -18,6 +18,12 @@ export const FETCH_USER_PREFERENCES = 'FETCH_USER_PREFERENCES';
 export const FETCH_USER_PREFERENCES_SUCCESS = 'FETCH_USER_PREFERENCES_SUCCESS';
 
 export const FETCH_USER_PREFERENCES_FAILURE = 'FETCH_USER_PREFERENCES_FAILURE';
+
+export const SET_USER_PREFERENCES = 'SET_USER_PREFERENCES';
+
+export const SET_USER_PREFERENCES_SUCCESS = 'SET_USER_PREFERENCES_SUCCESS';
+
+export const SET_USER_PREFERENCES_FAILURE = 'SET_USER_PREFERENCES_FAILURE';
 
 // Action creators for the Redux Store.
 export const loginUser = () => ({
@@ -52,6 +58,21 @@ export const fetchUserPreferencesFailure = (fetchFail) => ({
     type: FETCH_USER_PREFERENCES_FAILURE,
     payload: fetchFail.payload,
     error: fetchFail.error
+});
+
+export const setUserPreferences = () => ({
+    type: SET_USER_PREFERENCES
+});
+
+export const setUserPreferencesSuccess = (userPrefs) => ({
+    type: SET_USER_PREFERENCES_SUCCESS,
+    payload: userPrefs
+});
+
+export const setUserPreferencesFailure = (userFail) => ({
+    type: SET_USER_PREFERENCES_FAILURE,
+    payload: userFail.payload,
+    error: userFail.error
 });
 
 // Authorization actions for the Redux Store.
@@ -143,6 +164,24 @@ export function getUserPreferences(userId) {
         } catch (err) {
             console.log(err);
             dispatch(fetchUserPreferencesFailure({
+                payload: err,
+                error: true
+            }));
+        }
+    }
+}
+
+export function setFavoriteCharacter(userId, characterId) {
+    return async (dispatch) => {
+        dispatch(setUserPreferences());
+        try {
+            await updateFavoriteCharacter(userId, characterId).then((res) => {
+                if (res.data) dispatch(setUserPreferencesSuccess(characterId));
+                else dispatch(setUserPreferencesFailure({data: res.data, error: true}));
+            });
+        } catch (err) {
+            console.log(err);
+            dispatch(setUserPreferencesFailure({
                 payload: err,
                 error: true
             }));

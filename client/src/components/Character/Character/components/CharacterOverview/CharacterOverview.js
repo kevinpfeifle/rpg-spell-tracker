@@ -61,7 +61,7 @@ class CharacterOverview extends React.Component {
 };
 
 const mapStateToProps = (state, ownProps) => ({
-    character: state.character[ownProps.characterId]
+    character: state.character.characters[ownProps.characterId]
 });
 
 export default connect(mapStateToProps)(CharacterOverview);

@@ -28,10 +28,10 @@ function getCharacterOverview(userId, characterId) {
         }).catch((err) => {
             if (err.response) {
                 if (err.response.status === 401 || err.response.status === 403) {
-                    if (characterId != null) resolve([{characterId: characterId, 'authorizedUser': false}]); 
+                    if (characterId != null) resolve([{character_id: characterId, 'authorizedUser': false}]); 
                     else resolve([{}]);
                 } else if (err.response.status === 404) {
-                    if (characterId != null) resolve([{characterId: characterId, 'characterExists': false}]);
+                    if (characterId != null) resolve([{character_id: characterId, 'characterExists': false}]);
                     else resolve([{}]);
                 } else reject(err); // All other codes are an error for this resource.
             } else {

@@ -12,6 +12,7 @@ import RouteNotFound from './components/RouteNotFound';
 
 // import Footer from './components/Footer';
 // import Navbar from './components/Navbar/Navbar';
+import CharacterSelector from './components/Character/CharacterSelector/CharacterSelector';
 import Character from './components/Character/Character/Character';
 import Login from './components/Authentication/Login';
 import Logout from './components/Authentication/Logout';
@@ -44,7 +45,9 @@ class App extends React.Component {
                         <Route path='/login' render={() => <Login />} />
                         <Route path='/register' render={() => <Register />} />
                         <Route path='/logout' render={() => <Logout />} />
-                        <Route path='/character/:id' render={(id) => (this.props.userAuthenticated) ? <Character characterId={id.match.params.id} /> : <Login />} />
+                        <Route exact path='/character' render={() => (this.props.userAuthenticated) ? <CharacterSelector /> : <Login />} />
+                        <Route exact path='/character/new' render={() => (this.props.userAuthenticated) ? <Character characterId={1} /> : <Login />} />
+                        <Route path='/character/view/:id' render={(id) => (this.props.userAuthenticated) ? <Character characterId={id.match.params.id} /> : <Login />} />
                         <Route render={() => <RouteNotFound />} /> {/* Catch all route for invalid URL paths, has a link to the home route. */}
                         {/* <Route path='/' render={() => <UnderConstruction />} /> */}
                     </Switch>

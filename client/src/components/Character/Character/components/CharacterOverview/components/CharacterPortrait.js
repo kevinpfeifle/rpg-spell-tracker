@@ -61,7 +61,7 @@ class CharacterPortrait extends React.Component {
             return (
                 <div className='container-alternate container-centered-content container-squared'></div>
             );
-        } else if (this.state.portraitFound === false || this.state.portraitString === '' || this.state.portraitEncodeTag === '') {
+        } else if ((this.state.portraitFound === false || this.state.portraitString === '' || this.state.portraitEncodeTag === '') && !this.props.viewOnly) {
             return (
                 <div>  
                     <label htmlFor='portraitUpload'>
@@ -73,19 +73,22 @@ class CharacterPortrait extends React.Component {
                 </div>
             )
         } else {
-            // let characterDetails = this.props.character.characterOverview;
-            return (
-                <div>
-                    <img className='RPGToolIcon' src={this.state.portraitEncodeTag + this.state.portraitString} alt='RPGToolICon' style={{width:'100%', height: 'auto'}}/>
-                </div>
-            )
+            if ((this.state.portraitFound === true && this.state.portraitString !== '' && this.state.portraitEncodeTag !== '')) {
+                return (
+                    <img src={this.state.portraitEncodeTag + this.state.portraitString} alt='RPGToolIcon' style={{display: 'block', height:'100%', width: '100%', objectFit: 'cover'}}/>
+                )
+            } else {
+                return (
+                    <div className='container-alternate container-centered-content container-squared'></div>
+                )
+            }
         }
     }
 };
 
 const mapStateToProps = (state, ownProps) => ({
     userId: state.user.userInfo.userId,
-    character: state.character[ownProps.characterId]
+    character: state.character.characters[ownProps.characterId]
 });
 
 export default connect(mapStateToProps)(CharacterPortrait);

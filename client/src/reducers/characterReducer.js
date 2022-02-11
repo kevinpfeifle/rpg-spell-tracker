@@ -4,11 +4,12 @@ import * as actions from '../actions/characterActions'
 
 // The only starting value is loading, as we will create a character and tie it to its id whenever we view a new character page.
 const initState = {
+    characters: {},
     loading: false
 };
 
 const charcterReducer = (state = initState, action) => {
-    let character, updatedState;
+    let character, characters, updatedState;
     switch (action.type) {
         case actions.FETCH_CHARACTER_OVERVIEW:
             return { ...state, loading: true };
@@ -31,16 +32,20 @@ const charcterReducer = (state = initState, action) => {
             };
             // We have to set the state this way since "character" state could hold many parameterized character objects by id.
             updatedState = { ...state, loading: false };
-            updatedState[action.payload.character_id] = character;
+            characters = {...state.characters};
+            characters[action.payload.character_id] = character;
+            updatedState.characters = characters;
             return updatedState;
         case actions.FETCH_CHARACTER_OVERVIEW_FAILURE:
             // In this scenario we cannot display the character for some reason, so set the values necessary for rendering the page redirects.
             updatedState = { ...state, loading: false };
-            if (action.payload.error == null && action.payload.characterId != null) {
+            if (action.payload.error == null && action.payload.character_id != null) {
                 character = {};
                 character.authorizedUser = action.payload.authorizedUser;
                 character.characterExists = action.payload.characterExists;
-                updatedState[action.payload.characterId] = character;
+                characters = {...state.characters};
+                characters[action.payload.character_id] = character;
+                updatedState.characters = characters;
             }
             return updatedState;
     }
