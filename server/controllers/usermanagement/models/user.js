@@ -19,6 +19,24 @@ function fetchUserById(userId) {
     });
 }
 
+/**
+ * Updates the DB to set the user's favorite character. NOTE: Eventually this may expand to other items.
+ * @param {Number} userId 
+ * @param {Number} characterId 
+ * @returns the query result.
+ */
+function updateUserPreferences(userId, characterId) {
+    return new Promise((resolve, reject) => {
+        let query = queries.updateUserPreferences;
+        db.executeQuery('users', query, [userId, characterId]).then((results) => {
+            resolve(results);
+        }).catch((err) => {
+            reject(err);
+        });
+    });
+}
+
 module.exports = {
-    fetchUserById: fetchUserById
+    fetchUserById: fetchUserById,
+    updateUserPreferences: updateUserPreferences
 };

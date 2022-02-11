@@ -52,4 +52,42 @@ router.get('/', (req, res) => {
     }
 });
 
+
+router.put('/userPreferences', (req, res) => {
+    let resJson = {
+        'status': 'failure',
+        'message': 'Access denied',
+        'data': []
+    };
+    if (req.body != null && req.body.userId != null && req.body.characterId !== undefined) {
+        if (req.session && req.session.authenticated) {
+            if (req.session.userId === parseInt(req.body.userId)) {
+                user.updateUserPreferences(req.body.userId, req.body.characterId).then((results) => {
+                    if (results) {
+                        resJson.status = 'success';
+                        resJson.message = 'User preferences updated';
+                        resJson.data = results;
+                        res.status(201).json(resJson);
+                    } else throw new Error();
+                }).catch((err) => {
+                    resJson.message = 'Error encountered setting user preferences';
+                    resJson.error = err;
+                    res.status(500).json(resJson);
+                });
+            } else {
+                // Give no data back, user doesn't own this resource.
+                resJson.message = 'Access denied, user does not have permission to access this resource';
+                res.status(403).send(resJson);
+            }
+        } else {
+            // Give no data back. Not authed.
+            res.status(401).json(resJson);
+        }
+    } else {
+        // Give no data back. Request malformed.
+        resJson.message = 'Required parameters are missing';
+        res.status(400).json(resJson);
+    }
+});
+
 module.exports = router;
