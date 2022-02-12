@@ -56,6 +56,12 @@ class CharacterPortrait extends React.Component {
         })
     }
 
+    componentDidUpdate(prevProps) {
+        if (this.props.characterId !== prevProps.characterId) {
+            this.componentDidMount();
+        }
+    }
+
     render() {
         if (this.state.portraitFound == null) {
             return (
